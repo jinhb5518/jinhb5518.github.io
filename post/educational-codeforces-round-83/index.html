@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1583892252714">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1583894085584">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1583892252714" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1583894085584" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -84,6 +84,16 @@
           <div class="post-info post-detail-info">
             <span><i class="icon-calendar-outline"></i> 2020-03-10</span>
             
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://jinhb5518.github.io/tag/7DC2C06_-/">
+                    codeforces
+                    
+                  </a>
+                
+              </span>
+            
           </div>
           <div class="post-content">
             <h2 id="educational-codeforces-round-83">Educational Codeforces Round 83</h2>
@@ -120,6 +130,50 @@ int main()
 	ans=(ans*qpow(2,n-3))%mod;
 	printf(&quot;%lld\n&quot;,ans);
 	
+}
+</code></pre>
+<h1 id="e">E</h1>
+<p>题意：给定一个序列，如果有相邻的数相等<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>=</mo><msub><mi>a</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">a_i=a_{i+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span>，则可以用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">a_i+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>取代，问最后能得到最小的序列长度是多少。<br>
+题解：区间dp，其中dp[l][r]表示区间l到r能被表示成一个数，值为dp[l][r],最后<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mrow><mo fence="true">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">O\left(n^2\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.20001em;vertical-align:-0.35001em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span>扫过即可</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e3+20;
+int n,a[N];
+int f[N][N],g[N];
+int main()
+{
+	scanf(&quot;%d&quot;,&amp;n);
+	for(int i=1;i&lt;=n;i++)scanf(&quot;%d&quot;,&amp;a[i]);
+	for(int len=1;len&lt;=n;len++)
+	{
+		for(int l=1;l+len-1&lt;=n;l++)
+		{
+			int r=l+len-1;
+			if(l==r){
+				f[l][l]=a[l];continue;
+			}
+			f[l][r]=-1;
+			for(int k=l;k&lt;r;k++)
+			{
+				if(f[l][k]==f[k+1][r]&amp;&amp;f[l][k]!=-1)
+				{
+					f[l][r]=f[l][k]+1;
+				}
+			}
+		}
+	}
+	memset(g,0x3f,sizeof g);
+	g[0]=0;
+	for(int i=1;i&lt;=n;i++)
+	{
+		for(int j=i;j&lt;=n;j++)
+		{
+			if(f[i][j]!=-1){
+				g[j]=min(g[j],g[i-1]+1);
+			}
+		}
+	}
+	cout&lt;&lt;g[n]&lt;&lt;endl;
 }
 </code></pre>
 
