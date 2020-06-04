@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>codeforces | jinhb5518</title>
+<title>杂题记录 | jinhb5518</title>
 <meta name="description" content="Think twice|Code once">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -78,48 +78,87 @@
 
 
       <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">杂题记录</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-03-31</span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="abc160-f">abc160 F</h1>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e5+200,mod=1e9+7;
+vector&lt;int&gt; g[N];
+int n;
 
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> codeforces
-          </h2> 
+ll sz[N],tmp=1,a[N];
+ll qpow(ll a,ll b)
+{
+	ll ans=1;
+	while(b){
+		if(b&amp;1)ans=(ans*a)%mod;
+		a=a*a%mod;
+		b&gt;&gt;=1;
+	}
+	return ans;
+}
+void dfs(int u,int fa)
+{
+	sz[u]=1;
+	for(auto to:g[u])
+	{
+		if(to==fa)continue;
+		dfs(to,u);
+		sz[u]+=sz[to];
+	}
+	tmp=(tmp*sz[u])%mod;
+}
+void dfs2(int u,int fa)
+{
+	for(auto to:g[u])
+	{
+		if(to==fa)continue;
+		a[to]=a[u]*qpow(sz[to],mod-2)%mod*(n-sz[to])%mod;
+		dfs2(to,u);
+	}
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    ll lc=1;
+    for(ll i=2;i&lt;=n;i++)
+    {
+    	int a,b;
+		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+    	g[a].push_back(b);
+    	g[b].push_back(a);
+    	lc=(lc*i)%mod;
+	}
+	dfs(1,-1);
+	a[1]=tmp;
+	dfs2(1,-1);
+	for(int i=1;i&lt;=n;i++)printf(&quot;%lld\n&quot;,lc*qpow(a[i],mod-2)%mod);
+} 
+</code></pre>
+
+          </div>
         </div>
 
         
-<section class="post-item">
-    <div class="content">
-      <a href="https://jinhb5518.github.io/post/codeforces-round/">
-        <h2 class="post-title">CF记录</h2>
-      </a>
-      <div class="post-abstract">
-        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/codeforces-round/">
+              <h3 class="post-title">
+                下一篇：CF记录
+              </h3>
+            </a>
+          </div>
+          
       </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-03-10</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://jinhb5518.github.io/tag/7DC2C06_-/">
-                codeforces
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-  </section>
 
-
-<div class="pagination-container">
-  
-  
-</div>
-
-
-      </div>
+      
 
       <div class="site-footer">
   <div class="slogan">Think twice|Code once</div>
