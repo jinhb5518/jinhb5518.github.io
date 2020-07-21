@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jinhb5518.github.io</id>
     <title>jinhb5518</title>
-    <updated>2020-06-04T12:54:19.772Z</updated>
+    <updated>2020-07-21T02:41:32.798Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jinhb5518.github.io"/>
     <link rel="self" href="https://jinhb5518.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://jinhb5518.github.io/images/avatar.png</logo>
     <icon>https://jinhb5518.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, jinhb5518</rights>
+    <entry>
+        <title type="html"><![CDATA[2020牛客多校一]]></title>
+        <id>https://jinhb5518.github.io/post/2020-niu-ke-duo-xiao-yi/</id>
+        <link href="https://jinhb5518.github.io/post/2020-niu-ke-duo-xiao-yi/">
+        </link>
+        <updated>2020-07-19T05:13:02.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CF记录（2）]]></title>
         <id>https://jinhb5518.github.io/post/cf-ji-lu-2/</id>

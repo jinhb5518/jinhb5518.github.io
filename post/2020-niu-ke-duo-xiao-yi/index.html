@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>2020牛客多校一 | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1595299290553">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1595299290553" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">2020牛客多校一</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-07-19</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="a">A</h2>
+<h2 id="b">B</h2>
+<h2 id="c">C</h2>
+<h2 id="d">D</h2>
+<h2 id="e">E</h2>
+<h2 id="f">F</h2>
+<p>思维题，结论题</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e6+200;
+typedef long long ll;
+int main()
+{
+       string a,b;
+       while(cin&gt;&gt;a&gt;&gt;b){
+       	    int aa=a.length(),bb=b.length();
+       	    bool ok=false;
+       	    for(int i=0;i&lt;2*max(aa,bb);i++)
+       	    {
+       	        if(a[i%aa]&gt;b[i%bb]){
+       	         	puts(&quot;&gt;&quot;);ok=true;break;
+				}	
+				else if(a[i%aa]&lt;b[i%bb]){
+       	         	puts(&quot;&lt;&quot;);ok=true;break;
+				}	
+			}
+			if(!ok)puts(&quot;=&quot;);
+	   }
+}
+</code></pre>
+<h2 id="g">G</h2>
+<h2 id="h">H</h2>
+<h2 id="i">I</h2>
+<p>拆点拆边带花树，一般图最大匹配（网络流是错的</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1010,M=3e5+200;
+struct E{int to,nxt;}e[M];
+int n,m,id[N],Id,ans,match[N],pre[N],vis[N];
+int h[N],cnt,f[N],d[N];
+int x[N],y[N],num[N][N];
+queue&lt;int&gt;q;
+void init(){
+     Id=ans=cnt=0;
+	memset(h,-1,sizeof h);
+	memset(id,0,sizeof id);
+	memset(match,0,sizeof match);
+}
+void add(int u,int v){ e[cnt]=E{v,h[u]},h[u]=cnt++; }
+int getf(int x){ return f[x]==x?x:f[x]=getf(f[x]); }
+int LCA(int x,int y)
+{
+	for(++Id;;swap(x,y))
+		if(x)
+		{
+			x=getf(x);
+			if(id[x]==Id) return x;  
+			else id[x]=Id,x=pre[match[x]];		
+		}
+}
+void blossom(int x,int y,int l)
+{ 
+	while(getf(x)!=l)
+	{
+		pre[x]=y,y=match[x];
+		if(vis[y]==2) vis[y]=1,q.push(y);
+		if(getf(x)==x) f[x]=l;
+		if(getf(y)==y) f[y]=l;
+		x=pre[y];
+	} 
+}
+bool aug(int s){
+	for(int i=1;i&lt;=n;i++)
+		vis[i]=pre[i]=0,f[i]=i;
+	while(!q.empty()) q.pop();
+	q.push(s),vis[s]=1;
+	while(!q.empty())
+	{
+		int u=q.front();q.pop();
+		for(int i=h[u];~i;i=e[i].nxt)
+		{
+			int v=e[i].to;
+			if(getf(u)==getf(v)||vis[v]==2) continue;
+			if(!vis[v])
+			{
+				vis[v]=2,pre[v]=u;
+				if(!match[v])
+				{ 
+					for(int x=v,last;x;x=last)
+						last=match[pre[x]],match[x]=pre[x],match[pre[x]]=x;		
+					return 1;
+				}	
+				vis[match[v]]=1,q.push(match[v]);
+			} 
+			else 
+			{
+				 
+				int lca=LCA(u,v);
+				blossom(u,v,lca),blossom(v,u,lca);
+			}
+		}	
+	}
+	return 0;
+}
+void build()
+{
+	int kk=0;
+	for(int i=1;i&lt;=n;i++)
+	    for(int j=1;j&lt;=d[i];j++)
+	    num[i][j]=++kk;
+	for(int i=1;i&lt;=m;i++){
+		add(kk+1,kk+2);
+		add(kk+2,kk+1);
+		for(int j=1;j&lt;=d[x[i]];j++){
+			add(num[x[i]][j],kk+1);
+			add(kk+1,num[x[i]][j]);
+		}
+		for(int j=1;j&lt;=d[y[i]];j++){
+			add(num[y[i]][j],kk+2);
+			add(kk+2,num[y[i]][j]);
+		}
+		kk+=2;
+	}
+	n=kk;
+}
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		init();
+		for(int i=1;i&lt;=n;i++)scanf(&quot;%d&quot;,&amp;d[i]); 
+		for(int i=1;i&lt;=m;i++){
+			scanf(&quot;%d%d&quot;,&amp;x[i],&amp;y[i]);
+		}
+		build();
+		
+		for(int i=1;i&lt;=n;i++){
+			if(!match[i]&amp;&amp;aug(i)){
+				ans++;
+			}
+		}
+		if(ans*2==n)puts(&quot;Yes&quot;);
+		else puts(&quot;No&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="j">J</h2>
+<p>微积分，贝塔函数</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;;
+const int N=3e6+3000;
+const ll mod=998244353;
+ll f[N];
+ll qpow(ll a,ll b){
+	ll ans=1;
+	while(b)
+	{
+		if(b&amp;1)ans=(ans*a)%mod;
+		b&gt;&gt;=1;
+		a=(a*a)%mod;
+	}
+	return ans;
+}
+int main()
+{
+	ll n;f[0]=1;
+	for(int i=1;i&lt;=3e6+10;i++)f[i]=f[i-1]*i%mod;
+	while(cin&gt;&gt;n)
+	{
+		cout&lt;&lt;f[n]*f[n]%mod*qpow(f[2*n+1],mod-2)%mod&lt;&lt;endl;
+	}
+	
+}
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/cf-ji-lu-2/">
+              <h3 class="post-title">
+                下一篇：CF记录（2）
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
