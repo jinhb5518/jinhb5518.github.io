@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1595299290553">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1595391922046">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1595299290553" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1595391922046" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -118,6 +118,91 @@ int main()
 </code></pre>
 <h2 id="g">G</h2>
 <h2 id="h">H</h2>
+<p>最小费用最大流，转化</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>c</mi><mo separator="true">,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>c</mi><mo>∗</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>c</mi><mo separator="true">,</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>c</mi><mo>)</mo><mo>∗</mo><mi>c</mi><mo>=</mo><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>c</mi><mo>)</mo><mo>∗</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">cost(c, 1) = cost(c *1/c, 1/c) *c = cost(1, 1/c) * c
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>u</mi><mi mathvariant="normal">/</mi><mi>v</mi><mo separator="true">,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mn>1</mn><mo separator="true">,</mo><mi>v</mi><mi mathvariant="normal">/</mi><mi>u</mi><mo>)</mo><mo>∗</mo><mi>u</mi><mi mathvariant="normal">/</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">cost(u/v, 1) = cost(1, v/u) * u/v
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord">/</span><span class="mord mathdefault">u</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">u</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span></span></p>
+<p>第一位是每条边容量，第二位是总容量。<br>
+注意每条增广路的费用是依此递增的。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e6+20,M=8e6,inf=1e9;
+int h[N],to[M],val[M],cost[M],nxt[M],dis[N],fr[N],pre[N],vis[N],cnt=1;
+int s,t,x[N],y[N],w[N];
+int k,n,m,C;
+int ans[N],sum[N],si;
+void  add(int x,int y,int v,int c)
+{
+    to[++cnt]=y;val[cnt]=v;cost[cnt]=c;nxt[cnt]=h[x];h[x]=cnt;
+    to[++cnt]=x;val[cnt]=0;cost[cnt]=-c;nxt[cnt]=h[y];h[y]=cnt;
+}
+queue&lt;int&gt;q;
+bool spfa()
+{
+    int x,i;
+    memset(dis,0x3f,sizeof dis);
+    memset(vis,0,sizeof vis);
+    memset(fr,-1,sizeof fr);
+    dis[s]=0;q.push(s);
+    while(!q.empty())
+    {
+        x=q.front();q.pop();vis[x]=0;
+        for(i=h[x];i;i=nxt[i])
+        {
+            if(val[i]&amp;&amp;dis[to[i]]&gt;dis[x]+cost[i])
+            {
+            	dis[to[i]]=dis[x]+cost[i],fr[to[i]]=x,pre[to[i]]=i;
+                if(!vis[to[i]])
+                {
+                q.push(to[i]);vis[to[i]]=1;
+                }
+            }
+            
+        }
+    }
+    return ~fr[t];
+}
+int mincost()
+{
+    int i,k;
+    while(spfa())
+    {
+        k=inf;
+        for(i=t;i!=s;i=fr[i])k=min(k,val[pre[i]]);
+        ans[++si]=dis[t];sum[si]=sum[si-1]+ans[si];
+        for(i=t;i!=s;i=fr[i])val[pre[i]]-=k,val[pre[i]^1]+=k;
+    }
+    return  1;
+}
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		memset(ans,0,sizeof ans);
+		memset(sum,0,sizeof sum);
+		memset(h,0,sizeof h);
+		cnt=1;C=1;si=0;
+		for(int i=1;i&lt;=m;i++)
+		{
+			scanf(&quot;%d%d%d&quot;,&amp;x[i],&amp;y[i],&amp;w[i]);
+			add(x[i],y[i],1,w[i]);
+		} 
+		s=1,t=n;
+		mincost();
+		int q;scanf(&quot;%d&quot;,&amp;q);
+		while(q--)
+		{
+			int u,v;scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+			if(1ll*u*si&lt;v){puts(&quot;NaN&quot;);continue;}
+			ll w=v/u,ans1=1ll*sum[w]*u+1ll*ans[w+1]*(v%u),g=__gcd(ans1,1ll*v);
+			//printf(&quot;%lld\n&quot;,ans1);
+			printf(&quot;%lld/%lld\n&quot;,ans1/g,v/g);
+		}
+	}
+}
+</code></pre>
 <h2 id="i">I</h2>
 <p>拆点拆边带花树，一般图最大匹配（网络流是错的</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
