@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1595408478711">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1598450603174">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1595408478711" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1598450603174" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -142,6 +142,39 @@ int main()
 	dfs2(1,-1);
 	for(int i=1;i&lt;=n;i++)printf(&quot;%lld\n&quot;,lc*qpow(a[i],mod-2)%mod);
 } 
+</code></pre>
+<h1 id="牛客七夕-f-牛妹的考验">牛客七夕 F-牛妹的考验</h1>
+<p>AC自动机</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,nn,l,c[2010][26],q[2005],g[1006][2006],m,d[2005],ta,he,f[2005],ans;
+char s[2010];
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;nn,&amp;l);
+	for(int k,z=0;z&lt;nn;z++)
+	{
+		scanf(&quot;%s%d&quot;,s,&amp;k);
+		m=strlen(s);
+		int j,i;
+		for(i=j=0;i&lt;m;j=c[j][s[i++]-'a'])if(!c[j][s[i]-'a'])c[j][s[i]-'a']=++n;
+		d[j]+=k;
+	}
+	for(int i=0;i&lt;26;i++)if(c[0][i])q[ta++]=c[0][i];
+	while(he!=ta){
+		int i=q[he++];
+		for(int j=0;j&lt;26;j++)if(c[i][j])d[c[i][j]]+=d[f[q[ta++]=c[i][j]]=c[f[i]][j]];
+		else c[i][j]=c[f[i]][j];
+	}
+	memset(g,128,sizeof g);
+	ans=g[0][0];
+	//printf(&quot;%d \n&quot;,ans);
+	g[0][0]=0;
+	for(int i=0;i&lt;l;i++)for(int j=0;j&lt;=n;j++)for(int k=0;k&lt;26;k++)g[i+1][c[j][k]]=max(g[i+1][c[j][k]],g[i][j]+d[c[j][k]]);
+	for(int i=0;i&lt;=n;i++)ans=max(ans,g[l][i]);
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
 </code></pre>
 
           </div>
