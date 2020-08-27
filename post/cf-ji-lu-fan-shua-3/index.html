@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1598510633939">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1598533755916">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1598510633939" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1598533755916" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -140,6 +140,54 @@ int main()
 		}
 		printf(&quot;%lld\n&quot;,ans);
 	}
+} 
+</code></pre>
+<h1 id="e">E</h1>
+<p>题意：给定一个1e6*1e6的矩形，给若干条在与矩形相交一点垂直或水平的线段，问把矩形分成几个部分？<br>
+题解：首先，如果横跨左右肯定答案++，其次由于相交一点水平与垂直的线段若相交则必然答案++，树状数组维护即可。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define fi first 
+#define se second 
+#define pb push_back 
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; pii;
+const int mod=1e9+7;
+const int M=1e6+1,N=1e6+10;
+int n,m;
+vector&lt;pii&gt; h[N],v[N];
+int c[N];
+void add(int x,int val){for(int i=x;i&lt;N;i+=i&amp;-i)c[i]+=val;} 
+int ask(int x){int ans=0;for(int i=x;i&gt;0;i-=i&amp;-i)ans+=c[i];return ans;}
+int main()
+{
+  	
+	  	
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	  	ll ans=0;
+	  	for(int i=1;i&lt;=n;i++){
+	  		int a,b,c;scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);a++,b++,c++;
+	  	    h[a].pb({b,c});
+	  	    if(b==1&amp;&amp;c==M)ans++;   
+		}
+		for(int i=1;i&lt;=m;i++){
+	  		int x,d,u;scanf(&quot;%d%d%d&quot;,&amp;x,&amp;d,&amp;u);x++,d++,u++;
+	  	    v[d].pb({x,1});v[u+1].pb({x,-1});
+	  	    if(d==1&amp;&amp;u==M)ans++;
+	  	
+		}
+		for(int i=1;i&lt;=M;i++)
+		{
+			for(auto e:v[i]){
+				add(e.fi,e.se);
+			}
+			for(auto e:h[i]){  
+				ans+=ask(e.se)-ask(e.fi-1);
+			}
+		}
+		printf(&quot;%lld\n&quot;,ans+1);
+	
+	  
 } 
 </code></pre>
 
