@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>牛客系列之国庆七天乐一 | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1602041878030">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1602041878030" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">牛客系列之国庆七天乐一</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-10-03</span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="a">A</h1>
+<p>题意：给定一个字符串，求最少在结尾添加多少个字符串使之成为回文串。<br>
+分析：用马拉车求出包含结尾的最长回文子串用原串长度减去即可。</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=31000010;
+int n,ans,hw[N];
+char a[N],s[N&lt;&lt;1];
+void init()
+{
+	s[0]=s[1]='#';
+	for(int i=0;i&lt;n;i++)
+	{
+		s[i*2+2]=a[i];
+		s[i*2+3]='#';
+	}
+	n=n*2+2;
+	s[n]=0;
+}
+void manacher()
+{
+      int mx=0,mid;
+	  for(int i=1;i&lt;n;i++)
+	  {
+	  	if(i&lt;mx)hw[i]=min(hw[(mid&lt;&lt;1)-i],hw[mid]+mid-i);
+	  	else hw[i]=1;
+	  	for(;s[i+hw[i]]==s[i-hw[i]];++hw[i]);
+	  	
+	  	if(hw[i]+i&gt;mx)
+	  	{
+	  		mx=hw[i]+i;
+	  		mid=i;
+		}
+      }
+}
+
+int main()
+{
+	int l;
+	scanf(&quot;%d&quot;,&amp;n);
+	scanf(&quot;%s&quot;,a);l=n;
+	n=strlen(a);
+	init();
+	manacher();
+	ans=1;
+	for(int i=0;i&lt;n;i++)if(i+hw[i]==n)ans=max(hw[i]-1,ans);
+	printf(&quot;%d&quot;,l-ans);
+	return 0;
+}
+</code></pre>
+<h1 id="c">C</h1>
+<p>题意：给定一棵树，问最多经过多少次操作将其变成一条链。<br>
+分析：对于会非根节点，儿子个数大于1会增加贡献，根节点儿子个数大于2会增加贡献。<br>
+(或直接算每个点入度大于2则增加贡献</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=1e6+200;
+vector&lt;int&gt;g[N];
+int son[N];
+long long ans;
+void dfs(int u,int fa){
+    for(auto v:g[u]){
+        if(v==fa)continue;
+        dfs(v,u);son[u]++;
+    }
+    if(u==1)ans+=max(0,son[u]-2);
+    else ans+=max(0,son[u]-1);
+}
+int main()
+{
+    int n;scanf(&quot;%d&quot;,&amp;n);
+    for(int i=1;i&lt;n;i++)
+    {
+        int a,b;scanf(&quot;%d%d&quot;,&amp;a,&amp;b);g[a].push_back(b);
+        g[b].push_back(a);
+    }
+    for(int i=1;i&lt;=n;i++)if(g[i].size()&gt;2)
+    ans+=g[i].size()-2;
+    printf(&quot;%lld&quot;,ans);
+}
+</code></pre>
+<h1 id="e">E</h1>
+<p>题意：输入n,m , 计算[n,m]范围内的每个数的因子个数的总和。n,m&lt;=1e12<br>
+分析：通过观察可得，[1,n]中每个数的因子个数的总和等于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>n</mi><mi mathvariant="normal">/</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">\sum\limits_{i=1}^nn/i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.329066em;vertical-align:-0.9776689999999999em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3513970000000004em;"><span style="top:-2.122331em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.0000050000000003em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop op-symbol small-op">∑</span></span></span><span style="top:-3.950005em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9776689999999999em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mord">/</span><span class="mord mathdefault">i</span></span></span></span><br>
+整除分块或者转化为根号求一下即可</p>
+<pre><code class="language-cpp">#include&lt;iostream&gt;
+#include&lt;algorithm&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+using namespace std;
+const int N=1e6+200;
+typedef long long ll;
+ll solve(ll k)
+{
+	ll ans=0,t=sqrt(k);
+	for(int i=1;i&lt;=t;i++)ans+=k/i;
+	ans=ans*2-t*t;
+	return ans;
+}
+int main()
+{
+	ll n,m;
+	scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);
+    printf(&quot;%lld&quot;,solve(m)-solve(n-1));	
+}
+</code></pre>
+<h1 id="f">F</h1>
+<p>题意：给定n个数，求最少k个数的按位与（2进制）最大<br>
+分析：从高位到低位枚举如果该位的1的个数超过k个，则将剩余的n-k个排除，依此递推下去。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=2e5+200;
+int a[N];
+bool vis[N];
+int main()
+{
+    int n,k;scanf(&quot;%d%d&quot;,&amp;n,&amp;k);
+    for(int i=1;i&lt;=n;i++)scanf(&quot;%d&quot;,&amp;a[i]);
+    for(int i=29;i&gt;=0;i--)
+    {
+    	int cnt=0;
+		for(int j=1;j&lt;=n;j++)if(!vis[j]&amp;&amp;((a[j]&gt;&gt;i)&amp;1))cnt++;  
+		if(cnt&gt;=k){
+			for(int j=1;j&lt;=n;j++)if(!vis[j]&amp;&amp;(!((a[j]&gt;&gt;i)&amp;1)))vis[j]=1;
+		}       
+	}
+	int res=-1;
+	for(int i=1;i&lt;=n;i++){
+		if(!vis[i])res&amp;=a[i];
+	}
+	cout&lt;&lt;res&lt;&lt;endl;
+} 
+</code></pre>
+<h1 id="h">H</h1>
+<p>题意：给两个只有四个字母组成的字符串，问第一个需要交换多少次才能到第二个。<br>
+分析：仔细考虑一下只有下几种情况1.交换一次改变两个<br>
+2.交换两次改变三个<br>
+3.交换三次改变四个<br>
+操作编号越小越优</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e6+200;
+int f[500][500];
+char str[4]={'A','C','G','T'};
+int main()
+{
+    string s,t;
+    cin&gt;&gt;s&gt;&gt;t;
+    int n=s.length();
+    for(int i=0;i&lt;n;i++){
+    	if(s[i]!=t[i])f[s[i]][t[i]]++;
+	}
+	int ans=0;
+	for(int i=0;i&lt;4;i++)
+	   for(int j=0;j&lt;4;j++)
+	   {
+	   	    int t=min(f[str[i]][str[j]],f[str[j]][str[i]]);
+	   	    ans+=t;
+	   	    f[str[i]][str[j]]-=t;
+	   	    f[str[j]][str[i]]-=t;
+	   }
+	for(int i=0;i&lt;4;i++)
+	   for(int j=0;j&lt;4;j++)
+	   for(int z=0;z&lt;4;z++)
+	   {
+	   	    int t=min({f[str[i]][str[j]],f[str[j]][str[z]],f[str[z]][str[i]]});
+	   	    ans+=2*t;
+	   	    f[str[i]][str[j]]-=t;
+	   	    f[str[j]][str[z]]-=t;
+	   	    f[str[z]][str[i]]-=t;
+	   }
+	for(int i=0;i&lt;4;i++)
+	   for(int j=0;j&lt;4;j++)
+	   for(int z=0;z&lt;4;z++)
+	   for(int k=0;k&lt;4;k++)
+	   {
+	   	    int t=min({f[str[i]][str[j]],f[str[j]][str[z]],f[str[z]][str[k]],f[str[k]][str[i]]});
+	   	    ans+=3*t;
+	   	    f[str[i]][str[j]]-=t;
+	   	    f[str[j]][str[z]]-=t;
+	   	    f[str[z]][str[k]]-=t;
+	   	    f[str[k]][str[i]]-=t;
+	   }
+	   printf(&quot;%d&quot;,ans);
+	
+} 
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/cf-ji-lu-fan-shua-3/">
+              <h3 class="post-title">
+                下一篇：CF记录泛刷(3)
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
