@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1602041878030">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1602214113035">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1602041878030" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1602214113035" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -86,7 +86,7 @@
             
           </div>
           <div class="post-content">
-            <h1 id="a">A</h1>
+            <h1 id="a-abb">A ABB</h1>
 <p>题意：给定一个字符串，求最少在结尾添加多少个字符串使之成为回文串。<br>
 分析：用马拉车求出包含结尾的最长回文子串用原串长度减去即可。</p>
 <pre><code class="language-cpp">#include&lt;iostream&gt;
@@ -139,7 +139,7 @@ int main()
 	return 0;
 }
 </code></pre>
-<h1 id="c">C</h1>
+<h1 id="c-bob-in-wonderland">C Bob in Wonderland</h1>
 <p>题意：给定一棵树，问最多经过多少次操作将其变成一条链。<br>
 分析：对于会非根节点，儿子个数大于1会增加贡献，根节点儿子个数大于2会增加贡献。<br>
 (或直接算每个点入度大于2则增加贡献</p>
@@ -173,7 +173,53 @@ int main()
     printf(&quot;%lld&quot;,ans);
 }
 </code></pre>
-<h1 id="e">E</h1>
+<h1 id="d-deep800080">D Deep800080</h1>
+<p>题意：给定一条直线，n个点，问圆心在直线上半径为R且能覆盖最多个点的个数。<br>
+分析：点能被圆心覆盖当且仅当以该点为圆心做半径为R的圆与直线相交的线段区间内，故只要将所有线段全求出来起始坐标加一末尾坐标减一找最大即可。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n, r, A, B, ans, cnt, res;
+struct node
+{
+    int x, y;
+}p[1&lt;&lt;20];
+pair&lt;double, int&gt; q[1&lt;&lt;20];
+inline bool cmp(pair&lt;double, int&gt; a, pair&lt;double, int&gt; b)
+{
+    return a.first == b.first ? a.second &gt; b.second : a.first &lt; b.first;
+}
+int main()
+{
+    scanf(&quot;%d%d%d%d&quot;, &amp;n, &amp;r, &amp;A, &amp;B);
+    for(int i = 0; i &lt; n; i++)
+        scanf(&quot;%d%d&quot;, &amp;p[i].x, &amp;p[i].y);
+    if(A == 0)
+    {
+        swap(A, B);
+        for(int i = 0; i &lt; n; i++)
+            swap(p[i].x, p[i].y);
+    }
+    for(int i = 0; i &lt; n; i++)
+    {
+        double x = A * (1.0 * A * p[i].x + 1.0 * B * p[i].y) / (1.0 * A * A + 1.0 * B * B);
+        double y = x * B / A;
+        double d = sqrt((p[i].x - x) * (p[i].x - x) + (p[i].y - y) * (p[i].y - y));
+        if(d &lt;= r)
+        {
+            double p = sqrt(1.0*r*r - d*d);
+            double len = sqrt(x*x+y*y);
+            if(x&lt;0)len = -len;
+            q[cnt++] = make_pair(len+p, -1);
+            q[cnt++] = make_pair(len-p, 1);
+        }
+    }
+    sort(q, q+cnt, cmp);
+    for(int i = 0; i &lt; cnt; i++)
+        res += q[i].second, ans = max(ans, res);
+    printf(&quot;%d\n&quot;, ans);
+}   
+</code></pre>
+<h1 id="e-zeldain-garden">E Zeldain Garden</h1>
 <p>题意：输入n,m , 计算[n,m]范围内的每个数的因子个数的总和。n,m&lt;=1e12<br>
 分析：通过观察可得，[1,n]中每个数的因子个数的总和等于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>n</mi><mi mathvariant="normal">/</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">\sum\limits_{i=1}^nn/i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.329066em;vertical-align:-0.9776689999999999em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3513970000000004em;"><span style="top:-2.122331em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.0000050000000003em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop op-symbol small-op">∑</span></span></span><span style="top:-3.950005em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9776689999999999em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mord">/</span><span class="mord mathdefault">i</span></span></span></span><br>
 整除分块或者转化为根号求一下即可</p>
@@ -198,7 +244,7 @@ int main()
     printf(&quot;%lld&quot;,solve(m)-solve(n-1));	
 }
 </code></pre>
-<h1 id="f">F</h1>
+<h1 id="f-light-emitting-hindenburg">F 	Light Emitting Hindenburg</h1>
 <p>题意：给定n个数，求最少k个数的按位与（2进制）最大<br>
 分析：从高位到低位枚举如果该位的1的个数超过k个，则将剩余的n-k个排除，依此递推下去。</p>
 <pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
@@ -225,7 +271,79 @@ int main()
 	cout&lt;&lt;res&lt;&lt;endl;
 } 
 </code></pre>
-<h1 id="h">H</h1>
+<h1 id="g-ks">G 	K==S</h1>
+<p>题意：给定q个字符串，问长度为n且不包含其中任意一个字符串的可能性种数<br>
+题解：原题poj2778，AC自动机加矩阵快速幂，去掉所有终止节点建邻接矩阵，n次方即为答案，细节简代码。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2010,mod=1e9+7;
+int tot,n,qq;
+int c[N][26],d[N],q[2*N],ta,he,f[N];
+struct mat{
+	ll a[101][101];
+	void clear(){
+		memset(a,0,sizeof a);
+	}
+}U;
+mat mul(mat a,mat b)
+{
+	mat c;
+	c.clear();
+	for(int i=0;i&lt;=tot;i++){
+		for(int j=0;j&lt;=tot;j++)
+		{
+		    for(int k=0;k&lt;=tot;k++)
+			{
+			   c.a[i][j]=(c.a[i][j]+a.a[i][k]*b.a[k][j]%mod)%mod;	
+			}	
+		}
+	}
+	return c;
+}
+int main(){
+	cin&gt;&gt;n&gt;&gt;qq;
+	while(qq--){
+		int l;string s;
+		cin&gt;&gt;l&gt;&gt;s;
+		int i,j;
+		for(i=j=0;i&lt;l;j=c[j][s[i++]-'a'])if(!c[j][s[i]-'a'])c[j][s[i]-'a']=++tot;
+		d[j]=1;
+	}
+	for(int i=0;i&lt;26;i++)if(c[0][i])q[ta++]=c[0][i];
+	while(he!=ta){
+		int i=q[he++];
+		for(int j=0;j&lt;26;j++)if(c[i][j])d[c[i][j]]|=d[f[q[ta++]=c[i][j]]=c[f[i]][j]];
+		else c[i][j]=c[f[i]][j];
+	}
+	U.clear();
+	for(int i=0;i&lt;=tot;i++)
+	{
+		if(d[i])continue;
+		for(int j=0;j&lt;26;j++)
+		{
+			if(d[c[i][j]])continue;
+			U.a[i][c[i][j]]++;
+		}
+	}
+	mat ans;
+	ans.clear();
+	for(int i=0;i&lt;=tot;i++)ans.a[i][i]=1;
+	while(n){
+		//printf(&quot;%d\n&quot;,n);
+		if(n&amp;1)ans=mul(ans,U);
+		n&gt;&gt;=1;
+		U=mul(U,U);
+		
+	}
+	ll res=0;
+	for(int i=0;i&lt;=tot;i++)res=(res+ans.a[0][i])%mod;
+	cout&lt;&lt;res&lt;&lt;endl;
+	return 0;
+	
+}
+</code></pre>
+<h1 id="h-ponk-warshall">H Ponk Warshall</h1>
 <p>题意：给两个只有四个字母组成的字符串，问第一个需要交换多少次才能到第二个。<br>
 分析：仔细考虑一下只有下几种情况1.交换一次改变两个<br>
 2.交换两次改变三个<br>
