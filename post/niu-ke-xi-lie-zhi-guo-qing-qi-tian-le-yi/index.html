@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1602332193597">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1602640262030">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1602332193597" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1602640262030" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -401,6 +401,98 @@ int main()
 	   printf(&quot;%d&quot;,ans);
 	
 } 
+</code></pre>
+<h1 id="i-saba1000kg">I Saba1000kg</h1>
+<p>题意：给定一个n个点e条边的无向图，q个询问每次给出m个点，问每次给出的点构成了多少个连通块。n,e,q&lt;=1e5 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo><mi>m</mi><mo>≤</mo><mn>1</mn><mi>e</mi><mn>5</mn></mrow><annotation encoding="application/x-tex">\sum m \le 1e5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mord">5</span></span></span></span><br>
+分析：求连通块用并查集，记录点的度数，小于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msqrt><mi>n</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.23972em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathdefault">n</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span></span></span></span>的直接暴力处理，将大于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msqrt><mi>n</mi></msqrt></mrow><annotation encoding="application/x-tex">\sqrt{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.04em;vertical-align:-0.23972em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathdefault">n</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,
+-10,-9.5,-14c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54c44.2,-33.3,65.8,
+-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10s173,378,173,378c0.7,0,
+35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429c69,-144,104.5,-217.7,106.5,
+-221c5.3,-9.3,12,-14,20,-14H400000v40H845.2724s-225.272,467,-225.272,467
+s-235,486,-235,486c-2.7,4.7,-9,7,-19,7c-6,0,-10,-1,-12,-3s-194,-422,-194,-422
+s-65,47,-65,47z M834 80H400000v40H845z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span></span></span></span>的将所有能到的点保存在一个集合里，查询时直接找这些点是否在同一个集合里即可。(这东西叫根号分治？</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e5+200,K=400;
+vector&lt;int&gt;g[N];
+int n,e,p,v[N],d[N],fa[N],vv[N];
+bool vis[N];
+set&lt;int&gt;st[N];
+int find(int x){
+	return x==fa[x]?fa[x]:fa[x]=find(fa[x]);
+}
+int main()
+{
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;e,&amp;p);
+	for(int i=1;i&lt;=e;i++){
+		int u,v;
+		scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+		g[u].push_back(v);g[v].push_back(u);
+		d[u]++;d[v]++;
+	}
+	for(int i=1;i&lt;=n;i++){
+		fa[i]=i;
+		if(d[i]&gt;K){
+			for(auto v:g[i])st[i].insert(v);
+		}
+	}
+	while(p--)
+	{
+		
+		int m;scanf(&quot;%d&quot;,&amp;m);
+		for(int i=1;i&lt;=m;i++)
+		{
+			scanf(&quot;%d&quot;,&amp;v[i]);
+			vis[v[i]]=1;
+		}
+		int cnt=0;
+		for(int i=1;i&lt;=m;i++){
+			if(d[v[i]]&lt;=K)
+			{
+				for(auto w:g[v[i]]){
+					if(vis[w]){
+						int a=find(w);
+						int b=find(v[i]);
+						if(a!=b){
+							fa[a]=b;
+						}
+					}
+				}
+			}
+			else
+			{
+				vv[++cnt]=v[i];
+			}
+		}
+		for(int i=1;i&lt;=cnt;i++){
+			int x=vv[i];
+			for(int j=i+1;j&lt;=cnt;j++)if(st[x].count(vv[j])){
+				int y=vv[j];
+				int a=find(x);
+				int b=find(y);
+				if(a!=b){
+					fa[a]=b;
+				}
+			}
+		}
+		int ans=0;
+		for(int i=1;i&lt;=m;i++)
+		{
+			if(v[i]==fa[v[i]])ans++;
+		}
+		printf(&quot;%d\n&quot;,ans);
+		for(int i=1;i&lt;=m;i++){
+			vis[v[i]]=0;
+			fa[v[i]]=v[i];
+		}
+	}
+}
 </code></pre>
 
           </div>
