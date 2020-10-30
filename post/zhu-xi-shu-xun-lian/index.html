@@ -1,9 +1,11 @@
+
+<!DOCTYPE html>
 <html>
   <head>
     
 <meta charset="utf-8" >
 
-<title>jinhb5518</title>
+<title>主席树训练 | jinhb5518</title>
 <meta name="description" content="Think twice|Code once">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -75,109 +77,80 @@
 </transition>
 
 
-        <div class="content-container">
+      <div class="content-container">
+        <div class="post-detail">
           
-          
+          <h2 class="post-title">主席树训练</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-10-30</span>
+            
+          </div>
+          <div class="post-content">
+            <p>求区间第K小值</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=2e5+200;
+int a[N],b[N],cnt,root[N];
+struct Tree{
+	int L,R,sum;
+}t[N&lt;&lt;5];
+int update(int pre,int pl,int pr,int k)
+{
+	int rt=++cnt;
+	t[rt].L=t[pre].L;t[rt].R=t[pre].R;t[rt].sum=t[pre].sum+1;
+	int mid=(pl+pr)&gt;&gt;1;
+	if(pl&lt;pr){
+		if(k&lt;=mid)t[rt].L=update(t[pre].L,pl,mid,k);
+		else t[rt].R=update(t[pre].R,mid+1,pr,k);
+	}
+	return rt;
+}
+int query(int u,int v,int pl,int pr,int k)
+{
+	if(pl==pr)return pl;
+	int x=t[t[v].L].sum-t[t[u].L].sum;
+	int mid=(pl+pr)/2;
+	if(k&lt;=x)return query(t[u].L,t[v].L,pl,mid,k);
+	else return query(t[u].R,t[v].R,mid+1,pr,k-x);
+}
+int main()
+{
+	int n,m;scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=1;i&lt;=n;i++){
+		scanf(&quot;%d&quot;,&amp;a[i]);b[i]=a[i];
+	}
+	sort(a+1,a+1+n);
+	int num=unique(a+1,a+1+n)-a-1;
+	
+	for(int i=1;i&lt;=n;i++){
+		int x=lower_bound(a+1,a+1+num,b[i])-a;
+		root[i]=update(root[i-1],1,num,x);
+	}
+	while(m--)
+	{
+		int l,r,k;scanf(&quot;%d%d%d&quot;,&amp;l,&amp;r,&amp;k);
+		printf(&quot;%d\n&quot;,a[query(root[l-1],root[r],1,num,k)]);
+	}
+}
+</code></pre>
 
-<div class="archives-container">
-  
-    <h2 class="year">2020</h2>
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/zhu-xi-shu-xun-lian/">
-            <h2 class="post-title">
-              主席树训练
-              <small>2020-10-30</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-er/">
-            <h2 class="post-title">
-              牛客系列之国庆七天乐二
-              <small>2020-10-14</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-yi/">
-            <h2 class="post-title">
-              牛客系列之国庆七天乐一
-              <small>2020-10-03</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/cf-ji-lu-fan-shua-3/">
-            <h2 class="post-title">
-              CF记录泛刷(3)
-              <small>2020-08-24</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/2020-niu-ke-duo-xiao-yi/">
-            <h2 class="post-title">
-              2020牛客多校一
-              <small>2020-07-19</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/cf-ji-lu-2/">
-            <h2 class="post-title">
-              CF记录（2）
-              <small>2020-05-24</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/za-ti-ji-lu/">
-            <h2 class="post-title">
-              杂题记录
-              <small>2020-03-31</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-      
-        <article class="post">
-          <a href="https://jinhb5518.github.io/post/codeforces-round/">
-            <h2 class="post-title">
-              CF记录
-              <small>2020-03-10</small>
-            </h2>
-          </a>
-        </article>
-      
-    
-  
-</div>
-
-
+          </div>
         </div>
 
-        <div class="site-footer">
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-er/">
+              <h3 class="post-title">
+                下一篇：牛客系列之国庆七天乐二
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
   <div class="slogan">Think twice|Code once</div>
   <div class="social-container">
     
@@ -196,8 +169,8 @@
 </div>
 
 
-      </div>
-      <script type="application/javascript">
+    </div>
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
 
@@ -213,6 +186,5 @@ var app = new Vue({
 
 
 
-    </div>
   </body>
 </html>

@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>codeforces | jinhb5518</title>
+<title>牛客系列之国庆七天乐二 | jinhb5518</title>
 <meta name="description" content="Think twice|Code once">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -78,48 +78,119 @@
 
 
       <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">牛客系列之国庆七天乐二</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-10-14</span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="a">A</h1>
+<p>约瑟夫环简单模拟，略过</p>
+<h1 id="b">B</h1>
+<p>题意：给定一张无向图，给定k个从s到t的路径，问如何安排能使总路程最小。(k&lt;=18)<br>
+分析：最短路加状压dp</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e5+200;
+int h[N],to[N],nxt[N],cnt;ll val[N];
+void add(int a,int b,ll c){
+	to[++cnt]=b;nxt[cnt]=h[a];h[a]=cnt;val[cnt]=c;
+}
+int n,m,k,f[20],d[20];
+bool vis[N];
+ll dis[N],dd[20][20],dp[20][1&lt;&lt;20];
+struct node{
+	int pos;ll dis;
+	bool operator &lt;(node A)const{
+		return A.dis&lt;dis;
+	}
+};
+priority_queue&lt;node&gt;q;
+void dij(int s){
+	for(int i=1;i&lt;=n;i++)dis[i]=1e18,vis[i]=0;
+	q.push({s,0});
+	dis[s]=0;
+	while(!q.empty()){
+	    
+		node U=q.top();q.pop();
+		int u=U.pos;
+		if(vis[u])continue;
+		vis[u]=1;
+		for(int i=h[u];i;i=nxt[i]){
+			if(dis[to[i]]&gt;dis[u]+val[i]){
+				dis[to[i]]=dis[u]+val[i];
+				q.push({to[i],dis[to[i]]});
+			}
+		}
+	}
+}
+int main()
+{
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+	while(m--){
+		int x,y,z;scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;z);add(x,y,z);add(y,x,z);
+	}
+	for(int i=1;i&lt;=k;i++)scanf(&quot;%d%d&quot;,&amp;f[i],&amp;d[i]);
+	for(int i=1;i&lt;=k;i++){
+		dij(d[i]);
+		for(int j=1;j&lt;=k;j++){
+			dd[i][j]=dis[f[j]];
+		}
+	}
+	for(int i=1;i&lt;=k;i++)
+	{
+		for(int j=0;j&lt;(1&lt;&lt;k);j++)
+		{
+			dp[i][j]=1e18;
+		}
+	}
+	for(int i=1;i&lt;=k;i++){
+		dp[i][1&lt;&lt;(i-1)]=dd[i][i];
+	}
+	for(int z=1;z&lt;(1&lt;&lt;k);z++)
+	{
+		for(int i=1;i&lt;=k;i++)if(z&amp;(1&lt;&lt;(i-1)))
+		{
+			for(int j=1;j&lt;=k;j++)
+			{
+				if(z&amp;(1&lt;&lt;(j-1)))continue;
+				dp[j][z|(1&lt;&lt;(j-1))]=min(dp[j][z|(1&lt;&lt;(j-1))],dp[i][z]+dd[i][j]+dd[j][j]);
+			}
+		}
+	}
+	ll ans=1e18;
+	for(int i=1;i&lt;=k;i++)
+	{
+		ans=min(ans,dp[i][(1&lt;&lt;k)-1]);
+	}
+	if(ans&gt;1e17){
+		puts(&quot;-1&quot;);
+	}
+	else {
+		cout&lt;&lt;ans&lt;&lt;endl;
+	}
+	
+}
+</code></pre>
 
-        <div class="current-tag-container">
-          <h2 class="title">
-            <i class="icon icon-pricetags-outline"></i> codeforces
-          </h2> 
+          </div>
         </div>
 
         
-<section class="post-item">
-    <div class="content">
-      <a href="https://jinhb5518.github.io/post/codeforces-round/">
-        <h2 class="post-title">CF记录</h2>
-      </a>
-      <div class="post-abstract">
-        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-yi/">
+              <h3 class="post-title">
+                下一篇：牛客系列之国庆七天乐一
+              </h3>
+            </a>
+          </div>
+          
       </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-03-10</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://jinhb5518.github.io/tag/7DC2C06_-/">
-                codeforces
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-  </section>
 
-
-<div class="pagination-container">
-  
-  
-</div>
-
-
-      </div>
+      
 
       <div class="site-footer">
   <div class="slogan">Think twice|Code once</div>

@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1602648587109">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1604035029922">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1602648587109" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1604035029922" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -176,6 +176,61 @@ int main()
 	return 0;
 }
 </code></pre>
+<h1 id="牛客2020noip模拟一">牛客2020noip模拟一</h1>
+<p>A 题意：ax+by+cz=d 是否有正整数解x,y,z<br>
+分析：扩欧拓展，判断gcd(a,b,c)%d是否等于0.</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+ll gcd(ll a,ll b){
+	return b?gcd(b,a%b):a;
+}
+int main()
+{
+     int T;scanf(&quot;%d&quot;,&amp;T);
+     while(T--)
+     {
+     	ll a,b,c,d;
+     	scanf(&quot;%lld%lld%lld%lld&quot;,&amp;a,&amp;b,&amp;c,&amp;d);
+     	ll k=gcd(a,b);k=gcd(c,k);
+     	if(k==0){
+     		if(d==0){puts(&quot;YES&quot;);continue;}
+     		else {puts(&quot;NO&quot;);continue;}
+		 }
+     	if(d%k==0)puts(&quot;YES&quot;);
+     	else puts(&quot;NO&quot;);
+	 }
+} 
+</code></pre>
+<p>B 题意：十个数，给出n个置换，每次问从l到r置换的结果<br>
+题解：置换的前缀和</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e5+200;
+int a[N],b[N],s[N][10],n,m,ha[10];
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=1;i&lt;=n;i++)scanf(&quot;%d%d&quot;,&amp;a[i],&amp;b[i]);
+	for(int i=0;i&lt;10;i++)s[0][i]=i;
+	for(int i=1;i&lt;=n;i++)
+	{
+		memcpy(s[i],s[i-1],sizeof(s[i]));
+		swap(s[i][a[i]],s[i][b[i]]);	
+	}
+	int l,r;
+	for(int i=1;i&lt;=m;i++)
+	{
+		scanf(&quot;%d%d&quot;,&amp;l,&amp;r);
+		for(int j=0;j&lt;10;j++)ha[s[l-1][j]]=j;
+		for(int j=0;j&lt;10;j++)printf(&quot;%d%c&quot;,ha[s[r][j]],&quot; \n&quot;[j==9]);
+	}
+	
+}
+</code></pre>
+<p>C 题意：给定一个长度为n的数列，每次取一个从l到r的多重数集，每次询问该多重数集不能表示的最小的数是哪个？<br>
+分析：结论：数组从小到大排序，每次若a[i]&lt;=sum+1,则将a[i]加入sum，否则最大的不能表示数则为sum+1.<br>
+对查询进行离线，建立一个树状数组，a[i]从小往大加，对所有查询遍历，若查询sum无法再增加则直接记录答案。</p>
 
           </div>
         </div>
