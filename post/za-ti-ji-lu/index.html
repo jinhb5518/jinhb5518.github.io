@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1604035029922">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1605261177538">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1604035029922" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1605261177538" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -231,6 +231,138 @@ int main()
 <p>C 题意：给定一个长度为n的数列，每次取一个从l到r的多重数集，每次询问该多重数集不能表示的最小的数是哪个？<br>
 分析：结论：数组从小到大排序，每次若a[i]&lt;=sum+1,则将a[i]加入sum，否则最大的不能表示数则为sum+1.<br>
 对查询进行离线，建立一个树状数组，a[i]从小往大加，对所有查询遍历，若查询sum无法再增加则直接记录答案。</p>
+<pre><code class="language-cpp">#include&lt;vector&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+#define ll long long
+const int N=1e5+9;
+int n,m;
+ll tr[N],ans[N];
+struct Node
+{
+	int id;
+    ll val;
+	Node(int _id=0,ll _val=0){id=_id,val=_val;}
+	bool operator &lt; (const Node &amp;a)const
+	{
+		return val==a.val?id&gt;a.id:val&lt;a.val;
+	}
+} a[N];
+struct Query
+{
+	int l,r,id;
+} Q[N];
+vector&lt;int&gt; vec[N];
+
+inline void add(int x,int c)
+{
+	while(x&lt;=n)
+	{
+		tr[x]+=c;
+		x+=(x&amp;-x);
+	}
+}
+
+inline ll ask(int x)
+{
+	ll res=0;
+	while(x)
+	{
+		res+=tr[x];
+		x-=(x&amp;-x);
+	}
+	return res;
+}
+
+signed main()
+{
+	// freopen(&quot;c.in&quot;,&quot;r&quot;,stdin);
+	// freopen(&quot;c.ans&quot;,&quot;w&quot;,stdout);
+	int p=0;
+	scanf(&quot;%d&quot;,&amp;n);
+	scanf(&quot;%d&quot;,&amp;m);
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%lld&quot;,&amp;a[i].val),a[i].id=i;
+	a[n+1].val=1e9+1;a[n+1].id=n+1;++n;
+	sort(a+1,a+1+n);
+	for(int i=n;i&gt;=1;i--) if(a[i].val==1) {p=i;break;}
+	if(!p) {for(int i=1;i&lt;=m;i++) puts(&quot;1&quot;);return 0;}
+	for(int i=1;i&lt;=m;i++) vec[p].push_back(i);
+	for(int i=1;i&lt;=m;i++)
+		scanf(&quot;%d%d&quot;,&amp;Q[i].l,&amp;Q[i].r);
+	for(int i=1;i&lt;=n;i++)
+	{
+		add(a[i].id,a[i].val);
+		for(auto j:vec[i])
+		{
+			ll sum=ask(Q[j].r)-ask(Q[j].l-1);
+			if(sum+1&lt;a[i].val) ans[j]=sum+1;
+			else
+			{
+				int t=upper_bound(a+1,a+1+n,Node(n+1,sum+2))-a-1;
+				if(t==i) ans[j]=sum+1;
+				else vec[t].push_back(j);
+			}
+		}
+	}
+	for(int i=1;i&lt;=m;i++) printf(&quot;%lld\n&quot;,ans[i]);
+	return 0;
+}
+</code></pre>
+<p>每次加的过程也可以用主席树做（做法相对比较直接）</p>
+<pre><code class="language-cpp">
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e5+200;
+const ll inf=1e14;
+int a[N],cnt,root[N];
+struct Tree{
+    int L,R;ll sum,flag;
+}t[N*50];
+
+int update(int pre,ll pl,ll pr,ll val)
+{
+    int rt=++cnt;
+    t[rt]=t[pre];t[rt].sum+=val;
+    if(pl==pr)return rt;
+    ll mid=(pl+pr)/2;
+    if(val&lt;=mid)t[rt].L=update(t[rt].L,pl,mid,val);
+    else t[rt].R=update(t[rt].R,mid+1,pr,val);
+    return rt;
+    
+}
+ll query(int u,int v,ll pl,ll pr,ll L,ll R)
+{
+    if(!(t[v].sum-t[u].sum)||L&gt;pr||R&lt;pl)return 0;
+	if(L&lt;=pl&amp;&amp;pr&lt;=R)return t[v].sum-t[u].sum;
+    ll mid=(pl+pr)/2;
+    return query(t[u].L,t[v].L,pl,mid,L,R)+query(t[u].R,t[v].R,mid+1,pr,L,R);
+}
+int n,m,Time;
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int x,i=1;i&lt;=n;i++){
+    	scanf(&quot;%d&quot;,&amp;x);
+    	root[i]=update(root[i-1],1,inf,x);
+	}
+	while(m--)
+	{
+		int l,r;
+		scanf(&quot;%d%d&quot;,&amp;l,&amp;r);
+		ll mx=0,pos=0,Sum;
+		while(1){
+			Sum=query(root[l-1],root[r],1,inf,mx+1,pos+1);
+			if(!Sum)break;
+			mx=pos+1,pos+=Sum;
+		}
+		printf(&quot;%lld\n&quot;,pos+1);
+	}
+    
+}
+</code></pre>
 
           </div>
         </div>
