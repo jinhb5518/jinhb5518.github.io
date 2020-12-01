@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1605261851990">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1606788434981">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
 
@@ -30,7 +30,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://jinhb5518.github.io">
-        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1605261851990" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1606788434981" alt="" width="32px" height="32px">
       </a>
       <a href="https://jinhb5518.github.io">
         <h1 class="site-title">jinhb5518</h1>
@@ -189,6 +189,46 @@ int main()
 	
 	  
 } 
+</code></pre>
+<h2 id="educational-codeforces-round-99-rated-for-div-2">Educational Codeforces Round 99 (Rated for Div. 2)</h2>
+<h1 id="e-2">E</h1>
+<p>题意：在二位平面每次给出四个点的横纵坐标，将一个点上下左右平移算作依此操作，问将四个点组成正方形的四个顶点需要最少多少次操作？<br>
+分析：仅对下方代码进行解释，枚举1，2，3，4号点的顺序，之后以任意相邻的两点的任意横纵坐标差作为要构成正方形的边长，每次算出代价，取最小值。<br>
+算代价：每次将2，3，4号点减去对应的边长都对应在1号点，再求使四个点都在同一坐标的最小移动举例。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+const int N=5; 
+int t,x[N],y[N],a[N],b[N],p[N],A,X[N],Y[N];
+void C(int d)
+{
+	for(int i=1;i&lt;=4;i++)
+		X[i]=x[i],Y[i]=y[i];
+	X[2]-=d,X[4]-=d,Y[3]-=d,Y[4]-=d;
+	sort(X+1,X+5),sort(Y+1,Y+5);
+	A=min(A,X[4]+X[3]-X[2]-X[1]+Y[4]+Y[3]-Y[2]-Y[1]);
+}
+signed main()
+{
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		for(int i=1;i&lt;=4;i++)
+			cin&gt;&gt;a[i]&gt;&gt;b[i];
+		for(int i=1;i&lt;=4;i++)
+			p[i]=i;
+		A=1e18;
+		do
+		{
+			for(int i=1;i&lt;=4;i++)
+				x[i]=a[p[i]],y[i]=b[p[i]];
+			C(x[2]-x[1]),C(x[2]-x[3]),C(x[4]-x[1]),C(x[4]-x[3]);
+			C(y[3]-y[1]),C(y[3]-y[2]),C(y[4]-y[1]),C(y[4]-y[2]);
+		}while(next_permutation(p+1,p+5));
+		cout&lt;&lt;A&lt;&lt;'\n';
+	}
+	return 0;
+}
 </code></pre>
 
           </div>

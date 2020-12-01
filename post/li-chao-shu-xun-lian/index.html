@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>复习二分图与网络流 | jinhb5518</title>
+<title>李超树训练 | jinhb5518</title>
 <meta name="description" content="Think twice|Code once">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -80,107 +80,26 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">复习二分图与网络流</h2>
+          <h2 class="post-title">李超树训练</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-05-24</span>
+            <span><i class="icon-calendar-outline"></i> 2020-11-18</span>
             
           </div>
           <div class="post-content">
-            <h2 id="二分图判定">二分图判定</h2>
-<h1 id="关押罪犯">关押罪犯</h1>
-<p>题意：给定一张无向图，边有边权。找到最小的权值<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> ，使得只保留权值 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&gt;</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">&gt;k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span>的边时，图是一张二分图。<br>
-分析：二分答案，二分图染色判定即可。</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int N=2e4+200;
-typedef pair&lt;int,int&gt; pii;
-vector&lt;pii&gt;e[N];
-int v[N];
-int n,m;
-bool dfs(int x,int c,int val){
-	v[x]=c;
-	for(auto i:e[x])
-	{
-		int now=i.first,w=i.second;
-		if(w&lt;=val)continue;
-		if(v[now]==c)return 0;
-		if(!v[now]&amp;&amp;!dfs(now,3-c,val))return 0;
-	}
-	return 1;
-}
-bool check(int x){
-	memset(v,0,sizeof v);
-	for(int i=1;i&lt;=n;i++)
-	{
-		if(!v[i]&amp;&amp;!dfs(i,1,x))return 0;
-	}
-	return 1;
-}
-int main()
-{
-   	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-   	for(int i=1;i&lt;=m;i++)
-   	{
-   	    int a,b,c;
-		scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
-		e[a].push_back({b,c});
-		e[b].push_back({a,c});	
-	}
-	int l=0,r=1e9;
-	while(l&lt;r)
-	{
-		int mid=(l+r)/2;
-		if(check(mid)){
-			r=mid;
-		}
-		else {
-			l=mid+1;
-		}
-	}
-	printf(&quot;%d&quot;,r);
-} 
-</code></pre>
-<h2 id="匈牙利算法">匈牙利算法</h2>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-const int N=2e3+200;
-int v[N],f[N];
-int n,m,t;
-vector&lt;int&gt;e[N];
-int dfs(int x)
-{
-	for(auto y:e[x]){
-		if(!v[y]){
-			v[y]=1;
-			if(!f[y]||dfs(f[y]))return f[y]=x,1;
-		}
-	}
-	return 0;
-}
-int main()
-{
-   	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;t);
-	for(int x,y,i=1;i&lt;=t;i++)
-	{
-		scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
-		if(x&gt;n||y&gt;m)continue;
-		e[x].push_back(y+n);
-		e[y+n].push_back(x);
-	} 
-	int ans=0;
-	for(int i=1;i&lt;=n;i++)
-	{
-		for(int j=1;j&lt;=m+n;j++)v[j]=0;
-		ans+=dfs(i);
-	}
-	printf(&quot;%d&quot;,ans);
-} 
-</code></pre>
+            <p>luogu P4069 [SDOI2016]游戏</p>
 
           </div>
         </div>
 
         
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/zhu-xi-shu-xun-lian/">
+              <h3 class="post-title">
+                下一篇：主席树训练
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
       
