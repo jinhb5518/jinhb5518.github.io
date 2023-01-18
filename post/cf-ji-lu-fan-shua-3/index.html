@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>CF记录泛刷(3) | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1674047230095">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1674047230095" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">CF记录泛刷(3)</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-08-24</span>
+            
+          </div>
+          <div class="post-content">
+            <p>开了个新坑，希望能记录10道以上。</p>
+<h2 id="codeforces-round-665-div-2">Codeforces Round #665 (Div. 2)</h2>
+<h1 id="d">D</h1>
+<p>题意：给一个树，要求对树的每个边赋值，要求边权乘积等于k，值为一的边权在树中最小，要让树中任意两点的距离总和最大，给出k的质因数分解。<br>
+题解：首先知道每个边的权重为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>n</mi><mo>−</mo><mi>s</mi><mi>z</mi><mo>[</mo><mi>i</mi><mo>]</mo><mo>)</mo><mo>∗</mo><mi>s</mi><mi>z</mi><mo>[</mo><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">(n-sz[i])*sz[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>，其次注意不要取模后再排序。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int mod=1e9+7;
+const int N=1e5+200;
+int n,m;
+vector&lt;int&gt;G[N];
+ll sz[N],p[N],b[N];
+void dfs(int u,int fa)
+{
+	sz[u]=1;
+	for(auto v:G[u])
+	{
+		if(v!=fa){dfs(v,u);sz[u]+=sz[v];}
+	}
+}
+int main()
+{
+  	int T;scanf(&quot;%d&quot;,&amp;T);
+  	while(T--)
+  	{
+  		
+  	    ll ans=0;
+		  scanf(&quot;%d&quot;,&amp;n);
+  	    for(int i=1;i&lt;=n;i++)G[i].clear(),p[i]=1;
+  	    for(int u,v,i=1;i&lt;n;i++){
+  	    	scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+  	    	G[u].push_back(v);
+  	    	G[v].push_back(u);
+		}
+		dfs(1,0);
+		scanf(&quot;%d&quot;,&amp;m);
+		for(int i=1;i&lt;=m;i++){
+			scanf(&quot;%lld&quot;,&amp;p[i]);
+		}
+		m=max(n-1,m);
+		sort(p+1,p+1+m);
+		if(m&gt;n-1){
+			for(int i=n;i&lt;=m;i++)p[n-1]=(p[i]*p[n-1])%mod;
+		}
+		//sort(p+1,p+n);
+		for(int i=2;i&lt;=n;i++)b[i-1]=(n-sz[i])*sz[i];
+		sort(b+1,b+n);
+		for(int i=1;i&lt;n;i++){
+			ans=(ans+p[i]*b[i]%mod)%mod;
+			//printf(&quot;%lld   %lld\n&quot;,p[i],b[i]);
+		}
+		printf(&quot;%lld\n&quot;,ans);
+	}
+} 
+</code></pre>
+<h1 id="e">E</h1>
+<p>题意：给定一个1e6*1e6的矩形，给若干条在与矩形相交一点垂直或水平的线段，问把矩形分成几个部分？<br>
+题解：首先，如果横跨左右肯定答案++，其次由于相交一点水平与垂直的线段若相交则必然答案++，树状数组维护即可。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define fi first 
+#define se second 
+#define pb push_back 
+using namespace std;
+typedef long long ll;
+typedef pair&lt;int,int&gt; pii;
+const int mod=1e9+7;
+const int M=1e6+1,N=1e6+10;
+int n,m;
+vector&lt;pii&gt; h[N],v[N];
+int c[N];
+void add(int x,int val){for(int i=x;i&lt;N;i+=i&amp;-i)c[i]+=val;} 
+int ask(int x){int ans=0;for(int i=x;i&gt;0;i-=i&amp;-i)ans+=c[i];return ans;}
+int main()
+{
+  	
+	  	
+		scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	  	ll ans=0;
+	  	for(int i=1;i&lt;=n;i++){
+	  		int a,b,c;scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);a++,b++,c++;
+	  	    h[a].pb({b,c});
+	  	    if(b==1&amp;&amp;c==M)ans++;   
+		}
+		for(int i=1;i&lt;=m;i++){
+	  		int x,d,u;scanf(&quot;%d%d%d&quot;,&amp;x,&amp;d,&amp;u);x++,d++,u++;
+	  	    v[d].pb({x,1});v[u+1].pb({x,-1});
+	  	    if(d==1&amp;&amp;u==M)ans++;
+	  	
+		}
+		for(int i=1;i&lt;=M;i++)
+		{
+			for(auto e:v[i]){
+				add(e.fi,e.se);
+			}
+			for(auto e:h[i]){  
+				ans+=ask(e.se)-ask(e.fi-1);
+			}
+		}
+		printf(&quot;%lld\n&quot;,ans+1);
+	
+	  
+} 
+</code></pre>
+<h2 id="educational-codeforces-round-99-rated-for-div-2">Educational Codeforces Round 99 (Rated for Div. 2)</h2>
+<h1 id="e-2">E</h1>
+<p>题意：在二位平面每次给出四个点的横纵坐标，将一个点上下左右平移算作依此操作，问将四个点组成正方形的四个顶点需要最少多少次操作？<br>
+分析：仅对下方代码进行解释，枚举1，2，3，4号点的顺序，之后以任意相邻的两点的任意横纵坐标差作为要构成正方形的边长，每次算出代价，取最小值。<br>
+算代价：每次将2，3，4号点减去对应的边长都对应在1号点，再求使四个点都在同一坐标的最小移动举例。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+const int N=5; 
+int t,x[N],y[N],a[N],b[N],p[N],A,X[N],Y[N];
+void C(int d)
+{
+	for(int i=1;i&lt;=4;i++)
+		X[i]=x[i],Y[i]=y[i];
+	X[2]-=d,X[4]-=d,Y[3]-=d,Y[4]-=d;
+	sort(X+1,X+5),sort(Y+1,Y+5);
+	A=min(A,X[4]+X[3]-X[2]-X[1]+Y[4]+Y[3]-Y[2]-Y[1]);
+}
+signed main()
+{
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		for(int i=1;i&lt;=4;i++)
+			cin&gt;&gt;a[i]&gt;&gt;b[i];
+		for(int i=1;i&lt;=4;i++)
+			p[i]=i;
+		A=1e18;
+		do
+		{
+			for(int i=1;i&lt;=4;i++)
+				x[i]=a[p[i]],y[i]=b[p[i]];
+			C(x[2]-x[1]),C(x[2]-x[3]),C(x[4]-x[1]),C(x[4]-x[3]);
+			C(y[3]-y[1]),C(y[3]-y[2]),C(y[4]-y[1]),C(y[4]-y[2]);
+		}while(next_permutation(p+1,p+5));
+		cout&lt;&lt;A&lt;&lt;'\n';
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="codeforces-round-688-div-2">Codeforces Round #688 (Div. 2)</h2>
+<h1 id="d-2">D</h1>
+<p>题意：给定期望次数k（k&lt;=1e18），构造一串长n的零一序列(n&lt;=2000)有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>的概率成功通过第i个关卡,如果失败,立刻返回小于等于i的最小的1位置.<br>
+分析：https://blog.csdn.net/jziwjxjd/article/details/110674829（这位大佬讲的非常好）</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+ll f[65];
+vector&lt;int&gt;ans;
+int main()
+{
+	f[1]=2;
+	for(int i=2;i&lt;=60;i++)f[i]=f[i-1]*2+2;
+	int T;cin&gt;&gt;T;
+	while(T--)
+	{
+		ans.clear();bool ok=true;
+		ll k;cin&gt;&gt;k;
+		while(k)
+		{
+			for(int i=60;i&gt;=1;i--)
+			if(f[i]&lt;=k)
+			{
+				k-=f[i];
+				ans.push_back(1);
+				for(int j=2;j&lt;=i;j++)ans.push_back(0);
+				break;
+			}
+			if(k%2==1){ok=false;break;}
+		}
+		if(ans.size()&gt;2000)ok=false;
+		if(!ok)cout&lt;&lt;&quot;-1&quot;;
+		else {
+			cout&lt;&lt;ans.size()&lt;&lt;endl;
+			for(int i=0;i&lt;ans.size();i++)cout&lt;&lt;ans[i]&lt;&lt;&quot; &quot;;
+		}
+		cout&lt;&lt;endl;
+		
+	}
+}
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/2020-niu-ke-duo-xiao-yi/">
+              <h3 class="post-title">
+                下一篇：2020牛客多校一
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

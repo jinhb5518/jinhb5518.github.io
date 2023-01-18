@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>牛客系列之国庆七天乐二 | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1674047230095">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1674047230095" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">牛客系列之国庆七天乐二</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-10-14</span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="a">A</h1>
+<p>约瑟夫环简单模拟，略过</p>
+<h1 id="b">B</h1>
+<p>题意：给定一张无向图，给定k个从s到t的路径，问如何安排能使总路程最小。(k&lt;=18)<br>
+分析：最短路加状压dp</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e5+200;
+int h[N],to[N],nxt[N],cnt;ll val[N];
+void add(int a,int b,ll c){
+	to[++cnt]=b;nxt[cnt]=h[a];h[a]=cnt;val[cnt]=c;
+}
+int n,m,k,f[20],d[20];
+bool vis[N];
+ll dis[N],dd[20][20],dp[20][1&lt;&lt;20];
+struct node{
+	int pos;ll dis;
+	bool operator &lt;(node A)const{
+		return A.dis&lt;dis;
+	}
+};
+priority_queue&lt;node&gt;q;
+void dij(int s){
+	for(int i=1;i&lt;=n;i++)dis[i]=1e18,vis[i]=0;
+	q.push({s,0});
+	dis[s]=0;
+	while(!q.empty()){
+	    
+		node U=q.top();q.pop();
+		int u=U.pos;
+		if(vis[u])continue;
+		vis[u]=1;
+		for(int i=h[u];i;i=nxt[i]){
+			if(dis[to[i]]&gt;dis[u]+val[i]){
+				dis[to[i]]=dis[u]+val[i];
+				q.push({to[i],dis[to[i]]});
+			}
+		}
+	}
+}
+int main()
+{
+	scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;k);
+	while(m--){
+		int x,y,z;scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;z);add(x,y,z);add(y,x,z);
+	}
+	for(int i=1;i&lt;=k;i++)scanf(&quot;%d%d&quot;,&amp;f[i],&amp;d[i]);
+	for(int i=1;i&lt;=k;i++){
+		dij(d[i]);
+		for(int j=1;j&lt;=k;j++){
+			dd[i][j]=dis[f[j]];
+		}
+	}
+	for(int i=1;i&lt;=k;i++)
+	{
+		for(int j=0;j&lt;(1&lt;&lt;k);j++)
+		{
+			dp[i][j]=1e18;
+		}
+	}
+	for(int i=1;i&lt;=k;i++){
+		dp[i][1&lt;&lt;(i-1)]=dd[i][i];
+	}
+	for(int z=1;z&lt;(1&lt;&lt;k);z++)
+	{
+		for(int i=1;i&lt;=k;i++)if(z&amp;(1&lt;&lt;(i-1)))
+		{
+			for(int j=1;j&lt;=k;j++)
+			{
+				if(z&amp;(1&lt;&lt;(j-1)))continue;
+				dp[j][z|(1&lt;&lt;(j-1))]=min(dp[j][z|(1&lt;&lt;(j-1))],dp[i][z]+dd[i][j]+dd[j][j]);
+			}
+		}
+	}
+	ll ans=1e18;
+	for(int i=1;i&lt;=k;i++)
+	{
+		ans=min(ans,dp[i][(1&lt;&lt;k)-1]);
+	}
+	if(ans&gt;1e17){
+		puts(&quot;-1&quot;);
+	}
+	else {
+		cout&lt;&lt;ans&lt;&lt;endl;
+	}
+	
+}
+</code></pre>
+<h1 id="c">C</h1>
+<p>题意：有编号为1~n的试管，现在规定相邻两个试管不能混合，其余的可以混合，问可以得到多少种不同的混合物，若一种混合方式包含了另一种集合中的所有混合物，即算同一种混合方式。</p>
+<p>举例说明：<br>
+1个试管：0种混合方式<br>
+2个试管：0种混合方式<br>
+3个试管：1种混合方式 {1,3}<br>
+4个试管：3种混合方式 {1,3}、{2,4}、{1,4}<br>
+5个试管：4种混合方式 {1,3,5}、{2,4}、{2,5}、{1,5}<br>
+6个试管：5种混合方式 {1,3,5}、{1,3,6}、{2,4,6}、{2,5}、{1,4,6}<br>
+分析：找递推公式，每次第i个试管的混合物方式总是i-2与i-3个试管的总和。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+ll a[80];
+int main()
+{
+	a[1]=a[2]=0;
+	a[3]=1;a[4]=a[5]=2;
+	for(int i=6;i&lt;=76;i++){
+		a[i]=a[i-2]+a[i-3];
+	}int n,t=0;
+	while(scanf(&quot;%d&quot;,&amp;n)&amp;&amp;n){
+		printf(&quot;Case #%d: %lld\n&quot;,++t,a[n]+a[n-1]);
+	}
+} 
+</code></pre>
+<h1 id="d">D</h1>
+<p>分析：裸最小生成树</p>
+<pre><code class="language-cpp">#include &lt;cstring&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N = 510, INF = 0x3f3f3f3f;
+
+int n, m;
+int g[N][N];
+int dist[N];
+bool st[N];
+
+
+int prim()
+{
+    memset(dist, 0x3f, sizeof dist);
+
+    int res = 0;
+    for (int i = 0; i &lt; n; i ++ )
+    {
+        int t = -1;
+        for (int j = 1; j &lt;= n; j ++ )
+            if (!st[j] &amp;&amp; (t == -1 || dist[t] &gt; dist[j]))
+                t = j;
+
+        if (i &amp;&amp; dist[t] == INF) return INF;
+
+        if (i) res += dist[t];
+        st[t] = true;
+
+        for (int j = 1; j &lt;= n; j ++ ) dist[j] = min(dist[j], g[t][j]);
+    }
+
+    return res;
+}
+
+
+int main()
+{
+    int T,ca=0;scanf(&quot;%d&quot;,&amp;T);
+    while(T--)
+    {
+	    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	    memset(st,0,sizeof st);
+	    memset(g, 0x3f, sizeof g);
+	
+	    while (m -- )
+	    {
+	        int a, b, c;
+	        scanf(&quot;%d%d%d&quot;, &amp;a, &amp;b, &amp;c);
+	        g[a][b] = g[b][a] = min(g[a][b], c);
+	    }
+	
+	    int t = prim();
+	    printf(&quot;Case #%d: %d meters\n&quot;,++ca,t);
+	}
+	
+
+    return 0;
+}
+</code></pre>
+<h1 id="e">E</h1>
+<p>矩阵乘法</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=550;
+int a[N][N],b[N][N],c[N][N];
+int main()
+{
+	int T=0;
+	int m,n,p,q;
+	while(cin&gt;&gt;m&gt;&gt;n&gt;&gt;p&gt;&gt;q,m)
+	{
+		memset(c,0,sizeof c);
+		for(int i=1;i&lt;=m;i++)
+		   for(int j=1;j&lt;=n;j++)scanf(&quot;%d&quot;,&amp;a[i][j]);
+		for(int i=1;i&lt;=p;i++)
+		   for(int j=1;j&lt;=q;j++)scanf(&quot;%d&quot;,&amp;b[i][j]);
+		printf(&quot;Case #%d:\n&quot;,++T);
+		if(n!=p)puts(&quot;undefined&quot;);
+		else {
+			for(int i=1;i&lt;=m;i++)
+			   for(int j=1;j&lt;=q;j++)
+			      for(int z=1;z&lt;=n;z++)
+			      c[i][j]+=a[i][z]*b[z][j];
+		    for(int i=1;i&lt;=m;i++){
+		    	printf(&quot;| &quot;);for(int j=1;j&lt;=q;j++)printf(&quot;%d &quot;,c[i][j]);
+		    	printf(&quot;|\n&quot;);
+			}
+			   
+		}
+	}
+	
+	  
+	
+}
+</code></pre>
+<h1 id="f">F</h1>
+<pre><code>T = int(input())
+for i in range(0,T):
+    N=int(input())
+    print((N*(N+1)*(N+2)//6)**2)
+</code></pre>
+<h1 id="g">G</h1>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=1e6+200;
+double a[]={0.8,1.0,1.2},b[]={7.5,24,32};
+
+int main()
+{
+	int n,T=0;
+	while(cin&gt;&gt;n,n)
+	{
+		double ans=0;
+		for(int i=1;i&lt;=n;i++)
+		{
+			for(int j=0;j&lt;3;j++){
+				double x;cin&gt;&gt;x;
+				ans+=x*(a[j]-(b[j]+8.0)/85.0);
+			}
+			int x;cin&gt;&gt;x;
+			ans+=0.6*x;
+		}
+		printf(&quot;Case #%d: RM%.2lf\n&quot;,++T,ans);
+	}
+	
+	  
+	
+}
+</code></pre>
+<h1 id="f-2">F</h1>
+<p>长篇英语阅读理解题</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int cnt[5],cnt1[5][5];
+int main()
+{
+   	int T,t=0;scanf(&quot;%d&quot;,&amp;T);
+   	while(T--)
+   	{
+   	    int ok=1;
+		memset(cnt,0,sizeof cnt);
+   	    memset(cnt1,0,sizeof cnt1);
+		int temp=0,temp1=-1,temp2=-1;
+   	    while(1)
+   	    {
+   	        scanf(&quot;%d&quot;,&amp;temp);
+			int a=temp/10,b=temp%10;
+			if(temp1!=-1&amp;&amp;temp2!=-1)
+			{
+				if(temp/10==temp1/10&amp;&amp;temp/10==temp2/10)
+				{
+					ok=0;
+				}
+				if(temp%10==temp1%10&amp;&amp;temp%10==temp2%10)
+				{
+					ok=0;
+				}
+			}
+			if(temp==0)break;
+			cnt[a]++;cnt[b]++;
+			cnt1[a][b]++;
+			temp2=temp1;
+			temp1=temp;
+			 	
+		}
+		if(!(cnt1[1][1]==cnt1[2][2]&amp;&amp;cnt1[1][1]==cnt1[3][3]&amp;&amp;cnt1[1][1]==cnt1[4][4]))ok=0;
+		for(int i=1;i&lt;5;i++)
+		   for(int j=i+1;j&lt;=5;j++)
+		   {
+		   	if(cnt1[i][j]!=cnt1[j][i])ok=0;
+		   }
+		if(ok)printf(&quot;Case #%d: Stroop\n&quot;,++t);
+    	else printf(&quot;Case #%d: Not Stroop\n&quot;,++t);
+   	    
+	}
+	
+} 
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-yi/">
+              <h3 class="post-title">
+                下一篇：牛客系列之国庆七天乐一
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

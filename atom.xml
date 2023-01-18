@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://jinhb5518.github.io</id>
+    <title>jinhb5518</title>
+    <updated>2023-01-18T16:11:02.177Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://jinhb5518.github.io"/>
+    <link rel="self" href="https://jinhb5518.github.io/atom.xml"/>
+    <subtitle>Think twice|Code once</subtitle>
+    <logo>https://jinhb5518.github.io/images/avatar.png</logo>
+    <icon>https://jinhb5518.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, jinhb5518</rights>
+    <entry>
+        <title type="html"><![CDATA[网络编程]]></title>
+        <id>https://jinhb5518.github.io/post/wang-luo-bian-cheng/</id>
+        <link href="https://jinhb5518.github.io/post/wang-luo-bian-cheng/">
+        </link>
+        <updated>2023-01-18T11:15:33.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一些无聊的做题记录]]></title>
+        <id>https://jinhb5518.github.io/post/yi-xie-wu-liao-de-zuo-ti-ji-lu/</id>
+        <link href="https://jinhb5518.github.io/post/yi-xie-wu-liao-de-zuo-ti-ji-lu/">
+        </link>
+        <updated>2023-01-02T05:09:20.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[听课笔记]]></title>
+        <id>https://jinhb5518.github.io/post/ting-ke-bi-ji/</id>
+        <link href="https://jinhb5518.github.io/post/ting-ke-bi-ji/">
+        </link>
+        <updated>2022-07-01T06:35:58.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[李超树训练]]></title>
+        <id>https://jinhb5518.github.io/post/li-chao-shu-xun-lian/</id>
+        <link href="https://jinhb5518.github.io/post/li-chao-shu-xun-lian/">
+        </link>
+        <updated>2020-11-18T01:49:01.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[主席树训练]]></title>
+        <id>https://jinhb5518.github.io/post/zhu-xi-shu-xun-lian/</id>
+        <link href="https://jinhb5518.github.io/post/zhu-xi-shu-xun-lian/">
+        </link>
+        <updated>2020-10-30T03:27:14.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[牛客系列之国庆七天乐二]]></title>
+        <id>https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-er/</id>
+        <link href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-er/">
+        </link>
+        <updated>2020-10-14T05:54:54.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[牛客系列之国庆七天乐一]]></title>
+        <id>https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-yi/</id>
+        <link href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-yi/">
+        </link>
+        <updated>2020-10-03T02:30:56.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CF记录泛刷(3)]]></title>
+        <id>https://jinhb5518.github.io/post/cf-ji-lu-fan-shua-3/</id>
+        <link href="https://jinhb5518.github.io/post/cf-ji-lu-fan-shua-3/">
+        </link>
+        <updated>2020-08-24T14:59:34.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2020牛客多校一]]></title>
+        <id>https://jinhb5518.github.io/post/2020-niu-ke-duo-xiao-yi/</id>
+        <link href="https://jinhb5518.github.io/post/2020-niu-ke-duo-xiao-yi/">
+        </link>
+        <updated>2020-07-19T05:13:02.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CF记录（2）]]></title>
+        <id>https://jinhb5518.github.io/post/cf-ji-lu-2/</id>
+        <link href="https://jinhb5518.github.io/post/cf-ji-lu-2/">
+        </link>
+        <updated>2020-05-24T05:26:34.000Z</updated>
+    </entry>
+</feed>

@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>杂题记录 | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1674047230095">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1674047230095" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">杂题记录</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-03-31</span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="abc160-f">abc160 F</h1>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e5+200,mod=1e9+7;
+vector&lt;int&gt; g[N];
+int n;
+
+ll sz[N],tmp=1,a[N];
+ll qpow(ll a,ll b)
+{
+	ll ans=1;
+	while(b){
+		if(b&amp;1)ans=(ans*a)%mod;
+		a=a*a%mod;
+		b&gt;&gt;=1;
+	}
+	return ans;
+}
+void dfs(int u,int fa)
+{
+	sz[u]=1;
+	for(auto to:g[u])
+	{
+		if(to==fa)continue;
+		dfs(to,u);
+		sz[u]+=sz[to];
+	}
+	tmp=(tmp*sz[u])%mod;
+}
+void dfs2(int u,int fa)
+{
+	for(auto to:g[u])
+	{
+		if(to==fa)continue;
+		a[to]=a[u]*qpow(sz[to],mod-2)%mod*(n-sz[to])%mod;
+		dfs2(to,u);
+	}
+}
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;n);
+    ll lc=1;
+    for(ll i=2;i&lt;=n;i++)
+    {
+    	int a,b;
+		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);
+    	g[a].push_back(b);
+    	g[b].push_back(a);
+    	lc=(lc*i)%mod;
+	}
+	dfs(1,-1);
+	a[1]=tmp;
+	dfs2(1,-1);
+	for(int i=1;i&lt;=n;i++)printf(&quot;%lld\n&quot;,lc*qpow(a[i],mod-2)%mod);
+} 
+</code></pre>
+<h1 id="牛客七夕-f-牛妹的考验">牛客七夕 F-牛妹的考验</h1>
+<p>AC自动机</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int n,nn,l,c[2010][26],q[2005],g[1006][2006],m,d[2005],ta,he,f[2005],ans;
+char s[2010];
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;nn,&amp;l);
+	for(int k,z=0;z&lt;nn;z++)
+	{
+		scanf(&quot;%s%d&quot;,s,&amp;k);
+		m=strlen(s);
+		int j,i;
+		for(i=j=0;i&lt;m;j=c[j][s[i++]-'a'])if(!c[j][s[i]-'a'])c[j][s[i]-'a']=++n;
+		d[j]+=k;
+	}
+	for(int i=0;i&lt;26;i++)if(c[0][i])q[ta++]=c[0][i];
+	while(he!=ta){
+		int i=q[he++];
+		for(int j=0;j&lt;26;j++)if(c[i][j])d[c[i][j]]+=d[f[q[ta++]=c[i][j]]=c[f[i]][j]];
+		else c[i][j]=c[f[i]][j];
+	}
+	memset(g,128,sizeof g);
+	ans=g[0][0];
+	//printf(&quot;%d \n&quot;,ans);
+	g[0][0]=0;
+	for(int i=0;i&lt;l;i++)for(int j=0;j&lt;=n;j++)for(int k=0;k&lt;26;k++)g[i+1][c[j][k]]=max(g[i+1][c[j][k]],g[i][j]+d[c[j][k]]);
+	for(int i=0;i&lt;=n;i++)ans=max(ans,g[l][i]);
+	printf(&quot;%d\n&quot;,ans);
+	return 0;
+}
+</code></pre>
+<h1 id="牛客2020noip模拟一">牛客2020noip模拟一</h1>
+<p>A 题意：ax+by+cz=d 是否有正整数解x,y,z<br>
+分析：扩欧拓展，判断gcd(a,b,c)%d是否等于0.</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+ll gcd(ll a,ll b){
+	return b?gcd(b,a%b):a;
+}
+int main()
+{
+     int T;scanf(&quot;%d&quot;,&amp;T);
+     while(T--)
+     {
+     	ll a,b,c,d;
+     	scanf(&quot;%lld%lld%lld%lld&quot;,&amp;a,&amp;b,&amp;c,&amp;d);
+     	ll k=gcd(a,b);k=gcd(c,k);
+     	if(k==0){
+     		if(d==0){puts(&quot;YES&quot;);continue;}
+     		else {puts(&quot;NO&quot;);continue;}
+		 }
+     	if(d%k==0)puts(&quot;YES&quot;);
+     	else puts(&quot;NO&quot;);
+	 }
+} 
+</code></pre>
+<p>B 题意：十个数，给出n个置换，每次问从l到r置换的结果<br>
+题解：置换的前缀和</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e5+200;
+int a[N],b[N],s[N][10],n,m,ha[10];
+int main()
+{
+	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=1;i&lt;=n;i++)scanf(&quot;%d%d&quot;,&amp;a[i],&amp;b[i]);
+	for(int i=0;i&lt;10;i++)s[0][i]=i;
+	for(int i=1;i&lt;=n;i++)
+	{
+		memcpy(s[i],s[i-1],sizeof(s[i]));
+		swap(s[i][a[i]],s[i][b[i]]);	
+	}
+	int l,r;
+	for(int i=1;i&lt;=m;i++)
+	{
+		scanf(&quot;%d%d&quot;,&amp;l,&amp;r);
+		for(int j=0;j&lt;10;j++)ha[s[l-1][j]]=j;
+		for(int j=0;j&lt;10;j++)printf(&quot;%d%c&quot;,ha[s[r][j]],&quot; \n&quot;[j==9]);
+	}
+	
+}
+</code></pre>
+<p>C 题意：给定一个长度为n的数列，每次取一个从l到r的多重数集，每次询问该多重数集不能表示的最小的数是哪个？<br>
+分析：结论：数组从小到大排序，每次若a[i]&lt;=sum+1,则将a[i]加入sum，否则最大的不能表示数则为sum+1.<br>
+对查询进行离线，建立一个树状数组，a[i]从小往大加，对所有查询遍历，若查询sum无法再增加则直接记录答案。</p>
+<pre><code class="language-cpp">#include&lt;vector&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstring&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+#define ll long long
+const int N=1e5+9;
+int n,m;
+ll tr[N],ans[N];
+struct Node
+{
+	int id;
+    ll val;
+	Node(int _id=0,ll _val=0){id=_id,val=_val;}
+	bool operator &lt; (const Node &amp;a)const
+	{
+		return val==a.val?id&gt;a.id:val&lt;a.val;
+	}
+} a[N];
+struct Query
+{
+	int l,r,id;
+} Q[N];
+vector&lt;int&gt; vec[N];
+
+inline void add(int x,int c)
+{
+	while(x&lt;=n)
+	{
+		tr[x]+=c;
+		x+=(x&amp;-x);
+	}
+}
+
+inline ll ask(int x)
+{
+	ll res=0;
+	while(x)
+	{
+		res+=tr[x];
+		x-=(x&amp;-x);
+	}
+	return res;
+}
+
+signed main()
+{
+	// freopen(&quot;c.in&quot;,&quot;r&quot;,stdin);
+	// freopen(&quot;c.ans&quot;,&quot;w&quot;,stdout);
+	int p=0;
+	scanf(&quot;%d&quot;,&amp;n);
+	scanf(&quot;%d&quot;,&amp;m);
+	for(int i=1;i&lt;=n;i++) scanf(&quot;%lld&quot;,&amp;a[i].val),a[i].id=i;
+	a[n+1].val=1e9+1;a[n+1].id=n+1;++n;
+	sort(a+1,a+1+n);
+	for(int i=n;i&gt;=1;i--) if(a[i].val==1) {p=i;break;}
+	if(!p) {for(int i=1;i&lt;=m;i++) puts(&quot;1&quot;);return 0;}
+	for(int i=1;i&lt;=m;i++) vec[p].push_back(i);
+	for(int i=1;i&lt;=m;i++)
+		scanf(&quot;%d%d&quot;,&amp;Q[i].l,&amp;Q[i].r);
+	for(int i=1;i&lt;=n;i++)
+	{
+		add(a[i].id,a[i].val);
+		for(auto j:vec[i])
+		{
+			ll sum=ask(Q[j].r)-ask(Q[j].l-1);
+			if(sum+1&lt;a[i].val) ans[j]=sum+1;
+			else
+			{
+				int t=upper_bound(a+1,a+1+n,Node(n+1,sum+2))-a-1;
+				if(t==i) ans[j]=sum+1;
+				else vec[t].push_back(j);
+			}
+		}
+	}
+	for(int i=1;i&lt;=m;i++) printf(&quot;%lld\n&quot;,ans[i]);
+	return 0;
+}
+</code></pre>
+<p>每次加的过程也可以用主席树做（做法相对比较直接）</p>
+<pre><code class="language-cpp">
+#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e5+200;
+const ll inf=1e14;
+int a[N],cnt,root[N];
+struct Tree{
+    int L,R;ll sum,flag;
+}t[N*50];
+
+int update(int pre,ll pl,ll pr,ll val)
+{
+    int rt=++cnt;
+    t[rt]=t[pre];t[rt].sum+=val;
+    if(pl==pr)return rt;
+    ll mid=(pl+pr)/2;
+    if(val&lt;=mid)t[rt].L=update(t[rt].L,pl,mid,val);
+    else t[rt].R=update(t[rt].R,mid+1,pr,val);
+    return rt;
+    
+}
+ll query(int u,int v,ll pl,ll pr,ll L,ll R)
+{
+    if(!(t[v].sum-t[u].sum)||L&gt;pr||R&lt;pl)return 0;
+	if(L&lt;=pl&amp;&amp;pr&lt;=R)return t[v].sum-t[u].sum;
+    ll mid=(pl+pr)/2;
+    return query(t[u].L,t[v].L,pl,mid,L,R)+query(t[u].R,t[v].R,mid+1,pr,L,R);
+}
+int n,m,Time;
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    for(int x,i=1;i&lt;=n;i++){
+    	scanf(&quot;%d&quot;,&amp;x);
+    	root[i]=update(root[i-1],1,inf,x);
+	}
+	while(m--)
+	{
+		int l,r;
+		scanf(&quot;%d%d&quot;,&amp;l,&amp;r);
+		ll mx=0,pos=0,Sum;
+		while(1){
+			Sum=query(root[l-1],root[r],1,inf,mx+1,pos+1);
+			if(!Sum)break;
+			mx=pos+1,pos+=Sum;
+		}
+		printf(&quot;%lld\n&quot;,pos+1);
+	}
+    
+}
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/codeforces-round/">
+              <h3 class="post-title">
+                下一篇：CF记录
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

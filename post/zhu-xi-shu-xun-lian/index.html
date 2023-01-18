@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>主席树训练 | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1674047230095">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1674047230095" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">主席树训练</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-10-30</span>
+            
+          </div>
+          <div class="post-content">
+            <p>求区间第K小值</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=2e5+200;
+int a[N],b[N],cnt,root[N];
+struct Tree{
+	int L,R,sum;
+}t[N&lt;&lt;5];
+int update(int pre,int pl,int pr,int k)
+{
+	int rt=++cnt;
+	t[rt].L=t[pre].L;t[rt].R=t[pre].R;t[rt].sum=t[pre].sum+1;
+	int mid=(pl+pr)&gt;&gt;1;
+	if(pl&lt;pr){
+		if(k&lt;=mid)t[rt].L=update(t[pre].L,pl,mid,k);
+		else t[rt].R=update(t[pre].R,mid+1,pr,k);
+	}
+	return rt;
+}
+int query(int u,int v,int pl,int pr,int k)
+{
+	if(pl==pr)return pl;
+	int x=t[t[v].L].sum-t[t[u].L].sum;
+	int mid=(pl+pr)/2;
+	if(k&lt;=x)return query(t[u].L,t[v].L,pl,mid,k);
+	else return query(t[u].R,t[v].R,mid+1,pr,k-x);
+}
+int main()
+{
+	int n,m;scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+	for(int i=1;i&lt;=n;i++){
+		scanf(&quot;%d&quot;,&amp;a[i]);b[i]=a[i];
+	}
+	sort(a+1,a+1+n);
+	int num=unique(a+1,a+1+n)-a-1;
+	
+	for(int i=1;i&lt;=n;i++){
+		int x=lower_bound(a+1,a+1+num,b[i])-a;
+		root[i]=update(root[i-1],1,num,x);
+	}
+	while(m--)
+	{
+		int l,r,k;scanf(&quot;%d%d%d&quot;,&amp;l,&amp;r,&amp;k);
+		printf(&quot;%d\n&quot;,a[query(root[l-1],root[r],1,num,k)]);
+	}
+}
+</code></pre>
+<p>求区间内小于等于k的个数<br>
+(注意特判无解的情况</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=2e5+200;
+int a[N],b[N],cnt,root[N];
+struct Tree{
+	int L,R,sum;
+}t[N&lt;&lt;5];
+int update(int pre,int pl,int pr,int k)
+{
+	int rt=++cnt;
+	t[rt].L=t[pre].L;t[rt].R=t[pre].R;t[rt].sum=t[pre].sum+1;
+	int mid=(pl+pr)&gt;&gt;1;
+	if(pl&lt;pr){
+		if(k&lt;=mid)t[rt].L=update(t[pre].L,pl,mid,k);
+		else t[rt].R=update(t[pre].R,mid+1,pr,k);
+	}
+	return rt;
+}
+int query(int u,int v,int pl,int pr,int k)
+{
+	if(pl==pr)return t[v].sum-t[u].sum;
+	int mid=(pl+pr)/2,res=0;
+	if(k&lt;=mid)res+=query(t[u].L,t[v].L,pl,mid,k);
+	else {
+		res+=t[t[v].L].sum-t[t[u].L].sum;
+		res+=query(t[u].R,t[v].R,mid+1,pr,k);
+	}
+	return res;
+}
+int main()
+{
+	int T,t=0;scanf(&quot;%d&quot;,&amp;T);
+	while(T--)
+	{
+		int n,m;scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+		for(int i=1;i&lt;=n;i++){
+			scanf(&quot;%d&quot;,&amp;a[i]);b[i]=a[i];
+		}
+		sort(a+1,a+1+n);
+		int num=unique(a+1,a+1+n)-a-1;
+		
+		for(int i=1;i&lt;=n;i++){
+			int x=lower_bound(a+1,a+1+num,b[i])-a;
+			root[i]=update(root[i-1],1,num,x);
+		}
+		printf(&quot;Case %d:\n&quot;,++t);
+		while(m--)
+		{
+			int l,r,k;scanf(&quot;%d%d%d&quot;,&amp;l,&amp;r,&amp;k);l++,r++;
+			k=upper_bound(a+1,a+1+num,k)-a-1;
+			if(k)printf(&quot;%d\n&quot;,query(root[l-1],root[r],1,num,k));
+			else    printf(&quot;0\n&quot;);
+		}
+	}
+	
+}
+</code></pre>
+<p>Sequence II hdu 5919<br>
+题目描述：一个整数序列，有n个数A[1], A[2], …, A[n]。做m次询问，第i个询问，给定两个整数Li、Ri，表示一个区间，区间内是一个子序列，其中不同的整数有ki个，输出第ki/2个整数在这个子序列中第一次出现的位置。<br>
+分析：<br>
+比较经典的主席树维护区间种类问题的变形。</p>
+<p>相同元素只取最左侧位置，所以对序列a，从a[n]到a[1]建立主席树，插入新元素到主席树中时取消相同元素的贡献，只保留最左侧元素。<br>
+查询[l, r]的时候，查询第l个版本的主席树就好，复杂度O(nlogn)。</p>
+<p>这里需要注意一下（其实是主席树基本用法需要注意的东西），当对某版本进行多次单点更新的时候，每次都需要新增一条路径，必须保证不对以往的版本造成影响。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=2e5+200;
+int a[N],b[N],cnt,root[N],pre[N];
+struct Tree{
+	int L,R,sum;
+}t[N*40];
+int update(int pre,int pl,int pr,int k,int val)
+{
+	int rt=++cnt;
+	t[rt].L=t[pre].L;t[rt].R=t[pre].R;t[rt].sum=t[pre].sum+val;
+	int mid=(pl+pr)&gt;&gt;1;
+	if(pl&lt;pr){
+		if(k&lt;=mid)t[rt].L=update(t[pre].L,pl,mid,k,val);
+		else t[rt].R=update(t[pre].R,mid+1,pr,k,val);
+	}
+	return rt;
+}
+int query(int u,int pl,int pr,int L,int R)
+{
+	if(L&lt;=pl&amp;&amp;pr&lt;=R)return t[u].sum;
+	int mid=(pl+pr)/2;
+	int res=0;
+	if(L&lt;=mid)res+=query(t[u].L,pl,mid,L,R);
+	if(R&gt;mid)res+=query(t[u].R,mid+1,pr,L,R);
+	return res;
+}
+int kth(int u,int l,int r,int k)
+{
+	if(l==r)return l;
+	int mid=(l+r)&gt;&gt;1;
+	if(t[t[u].L].sum&lt;k)return kth(t[u].R,mid+1,r,k-t[t[u].L].sum);
+	else return kth(t[u].L,l,mid,k);
+}
+int main()
+{
+	int T,t=0;scanf(&quot;%d&quot;,&amp;T);
+	while(T--)
+	{
+		cnt=0;memset(pre,0,sizeof pre);
+		int n,m;scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+		for(int i=1;i&lt;=n;i++){
+			scanf(&quot;%d&quot;,&amp;a[i]);
+		}
+		for(int i=n;i&gt;=1;i--)
+		{
+			int x=a[i];
+			if(!pre[x]){
+				root[i]=update(root[i+1],1,n,i,1);
+			}
+			else {
+				int nt=update(root[i+1],1,n,pre[x],-1);
+				root[i]=update(nt,1,n,i,1);
+			}
+			pre[x]=i;
+		}
+		int res=0;printf(&quot;Case #%d:&quot;, ++t);
+		while(m--)
+		{
+			int l,r,k;scanf(&quot;%d%d&quot;,&amp;l,&amp;r);l=(l+res)%n+1;r=(r+res)%n+1;
+			if(l&gt;r)swap(l,r);
+			k=query(root[l],1,n,l,r);
+			k=(k+1)/2;
+			printf(&quot; %d&quot;,res=kth(root[l],1,n,k));
+		}
+		puts(&quot;&quot;);
+	}
+	
+}
+</code></pre>
+<p>hdu4348<br>
+To the moon hdu 4348 区间更新<br>
+题目描述：给定n个整数A[1], A[2], …, A[n]，执行m个操作，有以下几种操作：</p>
+<ol>
+<li>将l到r之间所有的数+d，同时时间戳+1。 2. 查询当前时间戳下l到r的所有数的总和。 3..查询时间戳d下的l到r的所有数的和。 4.将时间戳返回至t。<br>
+分析：涉及到主席树的区间修改，不要pushdown懒标记，而是选择标记永久化。<br>
+注意更新时要把pre的所有值附到更新点上。</li>
+</ol>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e5+200;
+int a[N],cnt,root[N];
+struct Tree{
+    int L,R;ll sum,flag;
+}t[N*50];
+int build(int pl,int pr){
+     int rt=++cnt;
+     t[rt].flag=0;t[rt].sum=0;    
+     if(pl==pr){
+         t[rt].sum=a[pl];return rt;
+     }
+     else if(pl&lt;pr)
+     {
+              int mid=(pl+pr)&gt;&gt;1;
+             t[rt].L=build(pl,mid);
+             t[rt].R=build(mid+1,pr);
+             t[rt].sum=t[t[rt].L].sum+t[t[rt].R].sum;
+             
+     }
+         
+     return rt;
+}
+
+int update(int pre,int pl,int pr,int l,int r,ll val)
+{
+    int rt=++cnt;
+    t[rt]=t[pre];t[rt].sum+=1ll*(r-l+1)*val;
+    if(l==pl&amp;&amp;r==pr){
+        t[rt].flag+=val;return rt;
+    }
+    int mid=(pl+pr)&gt;&gt;1;
+    if(r&lt;=mid){
+        t[rt].L=update(t[pre].L,pl,mid,l,r,val);
+    }
+    else if(l&gt;mid){
+        t[rt].R=update(t[pre].R,mid+1,pr,l,r,val);
+    }else {
+        t[rt].L=update(t[pre].L,pl,mid,l,mid,val);
+        t[rt].R=update(t[pre].R,mid+1,pr,mid+1,r,val);
+    }
+    return rt;
+    
+}
+ll query(int u,int pl,int pr,int L,int R)
+{
+    if(L&lt;=pl&amp;&amp;pr&lt;=R)return t[u].sum;
+    int mid=(pl+pr)/2;
+    ll res=t[u].flag*(R-L+1);
+    if(R&lt;=mid)res+=query(t[u].L,pl,mid,L,R);
+    else if(L&gt;mid)res+=query(t[u].R,mid+1,pr,L,R);
+    else {
+        res+=query(t[u].L,pl,mid,L,mid);
+        res+=query(t[u].R,mid+1,pr,mid+1,R);
+    }
+    return res;
+}
+int n,m,Time;
+int main()
+{
+    int t=0;
+    while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+    {
+        cnt=0;Time=0; 
+        ++t;
+        if(t&gt;1)puts(&quot;&quot;);
+        for(int i=1;i&lt;=n;i++){
+            scanf(&quot;%d&quot;,&amp;a[i]);
+        }
+        root[0]=build(1,n);
+        char s[10];int x,y,z;
+        while(m--)
+        {
+            scanf(&quot;%s&quot;,s+1);
+            if(s[1]=='C'){
+                scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;z);Time++;
+                root[Time]=update(root[Time-1],1,n,x,y,z);
+                
+            }else if(s[1]=='Q'){
+                scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+                printf(&quot;%lld\n&quot;,query(root[Time],1,n,x,y));
+            }else if(s[1]=='H'){
+                scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;z);
+                printf(&quot;%lld\n&quot;,query(root[z],1,n,x,y));
+            }
+            else{
+                scanf(&quot;%d&quot;,&amp;x);
+                cnt=root[x+1]-1;
+                Time=x;
+            }
+        }
+        
+    }
+    
+}
+</code></pre>
+<p>题意：给你一个序列，需要支持以下操作：1：区间内的所有数加上某个值。2：区间内的所有数除以某个数（向下取整）。3：询问某个区间内的最大值。</p>
+<p>分析：维护区间最大值和区间最小值，执行2操作时，继续向下寻找子区间，如果区间满足：min - (min / x) == max - (max / x)时，给这个区间内的所有数减去min - (min / x)就可以了。为什么这样做呢？因为向下取整操作变化速度远快于加法，在经过很多次操作后其实序列中的数区域相等，复杂度需要用势能分析之类的，均摊复杂度应该是O(n * (log(n) ^ 2))。</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define LL long long
+#define ls (o &lt;&lt; 1)
+#define rs (o &lt;&lt; 1 | 1)
+using namespace std;
+const int maxn = 200010;
+struct Seg {
+    LL add, mx, mi;
+};
+Seg tr[maxn * 4];
+LL a[maxn];
+ 
+void pushup(int o) {
+    tr[o].mx = max(tr[ls].mx, tr[rs].mx);
+    tr[o].mi = min(tr[ls].mi, tr[rs].mi);
+}
+ 
+void pushdown(int o) {
+    if(tr[o].add != 0) {
+        tr[ls].add += tr[o].add;
+        tr[ls].mi += tr[o].add;
+        tr[ls].mx += tr[o].add;
+        tr[rs].add += tr[o].add;
+        tr[rs].mi += tr[o].add;
+        tr[rs].mx += tr[o].add;
+        tr[o].add = 0;
+    }
+}
+ 
+void dfs(int o, int l, int r, LL val) {
+    if(tr[o].mi - (tr[o].mi / val) == tr[o].mx - (tr[o].mx / val)) {
+        LL tmp = tr[o].mi - (tr[o].mi / val);
+        tr[o].add -= tmp;
+        tr[o].mi -= tmp;
+        tr[o].mx -= tmp;
+        return;
+    }
+    int mid = (l + r) &gt;&gt; 1;
+    pushdown(o);
+    dfs(ls, l, mid, val);
+    dfs(rs, mid + 1, r, val);
+    pushup(o);
+}
+ 
+void build(int o, int l, int r) {
+    if(l == r) {
+        tr[o].add = 0;
+        tr[o].mx = tr[o].mi = a[l];
+        return;
+    }
+    int mid = (l + r) &gt;&gt; 1;
+    build(ls, l, mid);
+    build(rs, mid + 1, r);
+    pushup(o);
+}
+ 
+void update(int o, int l, int r, int ql, int qr, LL val, bool flag) {
+    if(l &gt;= ql &amp;&amp; r &lt;= qr) {
+        if(flag == 0) {
+            tr[o].mi += val;
+            tr[o].mx += val;
+            tr[o].add += val;
+        } else {
+            dfs(o, l, r, val);
+        }
+        return;
+    }
+    pushdown(o);
+    int mid = (l + r) &gt;&gt; 1;
+    if(ql &lt;= mid) update(ls, l, mid, ql, qr, val, flag);
+    if(qr &gt; mid) update(rs, mid + 1, r, ql, qr, val, flag);
+    pushup(o);
+}
+ 
+LL query(int o, int l, int r, int ql, int qr) {
+    if(l &gt;= ql &amp;&amp; r &lt;= qr) {
+        return tr[o].mx;
+    }
+    int mid = (l + r) &gt;&gt; 1;
+    LL ans = 0;
+    pushdown(o);
+    if(ql &lt;= mid) ans = max(ans, query(ls, l, mid, ql, qr));
+    if(qr &gt; mid) ans = max(ans, query(rs, mid + 1, r, ql, qr));
+    return ans;
+}
+ 
+int main() {
+    int op, l, r, x, n, m;
+    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+    for (int i = 1; i &lt;= n; i++) {
+        scanf(&quot;%lld&quot;, &amp;a[i]);
+    }
+    build(1, 1, n);
+    for (int i = 1; i &lt;= m; i++) {
+        scanf(&quot;%d&quot;, &amp;op);
+        if(op == 0) {
+            scanf(&quot;%d%d%d&quot;, &amp;l, &amp;r, &amp;x);
+            l++, r++;
+            update(1, 1, n, l, r, x, 0);
+        } else if(op == 1) {
+            scanf(&quot;%d%d%d&quot;, &amp;l, &amp;r, &amp;x);
+            l++, r++;
+            if(x != 1)
+                update(1, 1, n, l, r, x, 1);
+        } else {
+            scanf(&quot;%d%d%d&quot;, &amp;l, &amp;r, &amp;x);
+            l++, r++;
+            printf(&quot;%lld\n&quot;, query(1, 1, n, l, r));
+        }
+    }
+}
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/niu-ke-xi-lie-zhi-guo-qing-qi-tian-le-er/">
+              <h3 class="post-title">
+                下一篇：牛客系列之国庆七天乐二
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

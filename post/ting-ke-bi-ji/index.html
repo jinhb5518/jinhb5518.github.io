@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>听课笔记 | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1674047230095">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1674047230095" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">听课笔记</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2022-07-01</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="linux-基础">Linux 基础</h2>
+<h1 id="磁盘管理">磁盘管理</h1>
+<p>whoami<br>
+pwd查看当前目录<br>
+ls展示目录文件<br>
+cd切换工作目录<br>
+mkdir/rmdir<br>
+mkdir -p movies/hi_mom递归创建目录</p>
+<h1 id="文件管理">文件管理</h1>
+<p>cp 文件拷贝<br>
+mv 文件移动/改名<br>
+rm 删除普通文件<br>
+rm -rf 直接删除（慎用）<br>
+cat 读取文件<br>
+head/tail -n num XXX查看XXX文件的开头/结尾 的怒骂行</p>
+<h1 id="linux文件压缩与解压">Linux文件压缩与解压</h1>
+<p>打包：tar -zcvf<br>
+解压：tar -zxvf<br>
+zip/unzip<br>
+man 帮助命令<br>
+man ls<br>
+man 5 passwd<br>
+useradd 创建用户<br>
+userdel 删除用户<br>
+passwd修改用户密码<br>
+passwd work （root）<br>
+文件和目录权限管理<br>
+-rwxrwxrwx-<br>
+归属人 归属组 其他人<br>
+chmod 750 filename修改权限<br>
+chmod-R 750 dirname递归修改文件权限<br>
+修改归属<br>
+chown user：group filename<br>
+chown -Ruser：group dirname<br>
+递归修改该目录下全部文件<br>
+文件修改<br>
+sed -i ‘s/aaa/bbb/g' filename<br>
+将所有aaa替换为bbb<br>
+sed -i 1,3d filename<br>
+sed  -i 5d filename<br>
+文本处理命令awk<br>
+awk '{print $}'filename//以空格为分隔符，输出第二列<br>
+linux查找命令grep find<br>
+grep -n 't[ae]st' filename<br>
+grep abc -rl dirname<br>
+查找dirname中所有包含abc内容的文件<br>
+find / -name filename<br>
+从根目录下查找文件名为filename的文件<br>
+find / -name filename -type d<br>
+从根目录下查找文件名为filename并且属性为目录的文件<br>
+find / 0name filename -exec ls -l {} 、<br>
+从根目录下查找文件名为filename，并查看文件属性</p>
+<h2 id="linux-系统管理">Linux 系统管理</h2>
+<h1 id="软件包管理">软件包管理</h1>
+<p>CentOS:yum<br>
+Ubuntu:apt<br>
+yum install vim<br>
+yum install wget -y 跳过确认阶段立即执行(常用于脚本)<br>
+apt install wget -y</p>
+<h1 id="网络管理">网络管理</h1>
+<p>ping:检测网络连通性<br>
+telnet:检测域名/IP和端口<br>
+netstat:各种网络相关信息，如网络连接，路由表，接口状态<br>
+ifconfig:查看网卡信息<br>
+ping www.baidu.com<br>
+telnet www.baidu.com 80 可指定端口进行检测<br>
+netstat<br>
+ifconfig</p>
+<h1 id="进程与线程">进程与线程</h1>
+<p>ps：是Process Status的缩写，用来列出系统中当前运行的进程。 使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多的资源等等。 ps命令所列出的进行是当前进程的快照，也就是并不是动态的，而是执行该命令时那一时刻进行的状态。<br>
+top: top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器。<br>
+ps -ef 更详细展示PID，CMD<br>
+杀死进程<br>
+kill <pid><br>
+kill 9 <pid> 强制杀死</p>
+<h1 id="磁盘管理-2">磁盘管理</h1>
+<p>df命令：显示磁盘分区上可以使用的磁盘空间<br>
+du命令：显示每个文件和目录的磁盘使用空间<br>
+df -h</p>
+<h2 id="git">git</h2>
+<p>git checkout -f 撤销本地修改<br>
+git stash 放入暂存区<br>
+git rm --cache main.cpp撤销添加到缓存的修改<br>
+git reset 回滚<br>
+git tag 给提交贴标签<br>
+git status -sb -uno --show-stash 查看git状态<br>
+git log 查看提交记录和状态<br>
+git fetch &lt;远程主机名&gt;&lt;远程分支名&gt;：&lt;本地分支名&gt;从远程分支拉取<br>
+git merge origin.develop<br>
+git log --oneline --graph 提交记录<br>
+git branch -a -v 查看分支</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/li-chao-shu-xun-lian/">
+              <h3 class="post-title">
+                下一篇：李超树训练
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

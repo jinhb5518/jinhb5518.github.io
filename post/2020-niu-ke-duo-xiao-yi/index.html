@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>2020牛客多校一 | jinhb5518</title>
+<meta name="description" content="Think twice|Code once">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://jinhb5518.github.io/favicon.ico?v=1674047230095">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jinhb5518.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jinhb5518.github.io">
+        <img class="avatar" src="https://jinhb5518.github.io/images/avatar.png?v=1674047230095" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jinhb5518.github.io">
+        <h1 class="site-title">jinhb5518</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="https://jinhb5518.github.io/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">2020牛客多校一</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-07-19</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="a">A</h2>
+<p>后缀数组转化</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>C</mi><mi>i</mi></msub><mo>=</mo><mi>m</mi><mi>i</mi><msub><mi>n</mi><mrow><mi>j</mi><mo>&gt;</mo><mi>i</mi><mi>a</mi><mi>n</mi><mi>d</mi><msub><mi>s</mi><mi>j</mi></msub><mo>=</mo><msub><mi>s</mi><mi>i</mi></msub></mrow></msub><mrow><mi>j</mi><mo>−</mo><mi>i</mi></mrow></mrow><annotation encoding="application/x-tex">C_i = min_{j &gt; i and s_j = s_i} {j - i}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00684em;vertical-align:-0.34731999999999996em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">&gt;</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">d</span><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span><span class="mrel mtight">=</span><span class="mord mtight"><span class="mord mathdefault mtight">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.34731999999999996em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault">i</span></span></span></span></span></span></p>
+<p>向前间隔转化为向后间隔反序</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+const int N = 1e6+200;
+
+char ss[N];int s[N];
+int n, sa[N], rk[N], oldrk[N &lt;&lt; 1], id[N], px[N], cnt[N];
+// px[i] = rk[id[i]]（用于排序的数组所以叫 px）
+
+bool cmp(int x, int y, int w) {
+  return oldrk[x] == oldrk[y] &amp;&amp; oldrk[x + w] == oldrk[y + w];
+}
+void get_sa()
+{
+	  
+
+  int i, m = n, p, w;
+  for(int i=0;i&lt;=m;i++)cnt[i]=0;
+  for (i = 1; i &lt;= n; ++i) ++cnt[rk[i] = s[i]];
+  for (i = 1; i &lt;= m; ++i) cnt[i] += cnt[i - 1];
+  for (i = n; i &gt;= 1; --i) sa[cnt[rk[i]]--] = i;
+
+  for (w = 1; w &lt; n; w &lt;&lt;= 1, m = p) {  // m=p 就是优化计数排序值域
+    for (p = 0, i = n; i &gt; n - w; --i) id[++p] = i;
+    for (i = 1; i &lt;= n; ++i)
+      if (sa[i] &gt; w) id[++p] = sa[i] - w;
+    //memset(cnt, 0, sizeof(cnt));
+    for(int i=0;i&lt;=m;i++)cnt[i]=0;
+    for (i = 1; i &lt;= n; ++i) ++cnt[px[i] = rk[id[i]]];
+    for (i = 1; i &lt;= m; ++i) cnt[i] += cnt[i - 1];
+    for (i = n; i &gt;= 1; --i) sa[cnt[px[i]]--] = id[i];
+    //memcpy(oldrk, rk, sizeof(rk));
+    for(int i=0;i&lt;=n;i++)oldrk[i]=rk[i];
+    for (p = 0, i = 1; i &lt;= n; ++i)
+      rk[sa[i]] = cmp(sa[i], sa[i - 1], w) ? p : ++p;
+  }
+
+	
+	  
+}
+int main() {
+  
+  while(~scanf(&quot;%d&quot;,&amp;n))
+  {
+	  
+	  scanf(&quot;%s&quot;,ss+1);
+	  int pa=0,pb=0;
+	  for(int i=n;i&gt;=1;i--)
+	  {
+	  	if(ss[i]=='a'){
+	  		if(pa==0)s[i]=n;
+	  		else s[i]=pa-i;
+	  		pa=i;
+		}
+		else{
+			if(pb==0)s[i]=n;
+	  		else s[i]=pb-i;
+	  		pb=i;
+		}
+	  }
+	  n++;
+	  s[n]=n;
+	  get_sa();
+	  for(int i=n-1;i&gt;=1;i--)printf(&quot;%d &quot;,sa[i]);puts(&quot;&quot;);
+  	  
+  }
+  
+
+  return 0;
+}
+</code></pre>
+<h2 id="b">B</h2>
+<h2 id="c">C</h2>
+<h2 id="d">D</h2>
+<h2 id="e">E</h2>
+<h2 id="f">F</h2>
+<p>思维题，结论题</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e6+200;
+typedef long long ll;
+int main()
+{
+       string a,b;
+       while(cin&gt;&gt;a&gt;&gt;b){
+       	    int aa=a.length(),bb=b.length();
+       	    bool ok=false;
+       	    for(int i=0;i&lt;2*max(aa,bb);i++)
+       	    {
+       	        if(a[i%aa]&gt;b[i%bb]){
+       	         	puts(&quot;&gt;&quot;);ok=true;break;
+				}	
+				else if(a[i%aa]&lt;b[i%bb]){
+       	         	puts(&quot;&lt;&quot;);ok=true;break;
+				}	
+			}
+			if(!ok)puts(&quot;=&quot;);
+	   }
+}
+</code></pre>
+<h2 id="g">G</h2>
+<h2 id="h">H</h2>
+<p>最小费用最大流，转化</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>c</mi><mo separator="true">,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>c</mi><mo>∗</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>c</mi><mo separator="true">,</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>c</mi><mo>)</mo><mo>∗</mo><mi>c</mi><mo>=</mo><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mn>1</mn><mo separator="true">,</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>c</mi><mo>)</mo><mo>∗</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">cost(c, 1) = cost(c *1/c, 1/c) *c = cost(1, 1/c) * c
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">c</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">c</span></span></span></span></span></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mi>u</mi><mi mathvariant="normal">/</mi><mi>v</mi><mo separator="true">,</mo><mn>1</mn><mo>)</mo><mo>=</mo><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>(</mo><mn>1</mn><mo separator="true">,</mo><mi>v</mi><mi mathvariant="normal">/</mi><mi>u</mi><mo>)</mo><mo>∗</mo><mi>u</mi><mi mathvariant="normal">/</mi><mi>v</mi></mrow><annotation encoding="application/x-tex">cost(u/v, 1) = cost(1, v/u) * u/v
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">u</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord">/</span><span class="mord mathdefault">u</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">u</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span></span></span></span></span></p>
+<p>第一位是每条边容量，第二位是总容量。<br>
+注意每条增广路的费用是依此递增的。</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;
+const int N=2e6+20,M=8e6,inf=1e9;
+int h[N],to[M],val[M],cost[M],nxt[M],dis[N],fr[N],pre[N],vis[N],cnt=1;
+int s,t,x[N],y[N],w[N];
+int k,n,m,C;
+int ans[N],sum[N],si;
+void  add(int x,int y,int v,int c)
+{
+    to[++cnt]=y;val[cnt]=v;cost[cnt]=c;nxt[cnt]=h[x];h[x]=cnt;
+    to[++cnt]=x;val[cnt]=0;cost[cnt]=-c;nxt[cnt]=h[y];h[y]=cnt;
+}
+queue&lt;int&gt;q;
+bool spfa()
+{
+    int x,i;
+    memset(dis,0x3f,sizeof dis);
+    memset(vis,0,sizeof vis);
+    memset(fr,-1,sizeof fr);
+    dis[s]=0;q.push(s);
+    while(!q.empty())
+    {
+        x=q.front();q.pop();vis[x]=0;
+        for(i=h[x];i;i=nxt[i])
+        {
+            if(val[i]&amp;&amp;dis[to[i]]&gt;dis[x]+cost[i])
+            {
+            	dis[to[i]]=dis[x]+cost[i],fr[to[i]]=x,pre[to[i]]=i;
+                if(!vis[to[i]])
+                {
+                q.push(to[i]);vis[to[i]]=1;
+                }
+            }
+            
+        }
+    }
+    return ~fr[t];
+}
+int mincost()
+{
+    int i,k;
+    while(spfa())
+    {
+        k=inf;
+        for(i=t;i!=s;i=fr[i])k=min(k,val[pre[i]]);
+        ans[++si]=dis[t];sum[si]=sum[si-1]+ans[si];
+        for(i=t;i!=s;i=fr[i])val[pre[i]]-=k,val[pre[i]^1]+=k;
+    }
+    return  1;
+}
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		memset(ans,0,sizeof ans);
+		memset(sum,0,sizeof sum);
+		memset(h,0,sizeof h);
+		cnt=1;C=1;si=0;
+		for(int i=1;i&lt;=m;i++)
+		{
+			scanf(&quot;%d%d%d&quot;,&amp;x[i],&amp;y[i],&amp;w[i]);
+			add(x[i],y[i],1,w[i]);
+		} 
+		s=1,t=n;
+		mincost();
+		int q;scanf(&quot;%d&quot;,&amp;q);
+		while(q--)
+		{
+			int u,v;scanf(&quot;%d%d&quot;,&amp;u,&amp;v);
+			if(1ll*u*si&lt;v){puts(&quot;NaN&quot;);continue;}
+			ll w=v/u,ans1=1ll*sum[w]*u+1ll*ans[w+1]*(v%u),g=__gcd(ans1,1ll*v);
+			//printf(&quot;%lld\n&quot;,ans1);
+			printf(&quot;%lld/%lld\n&quot;,ans1/g,v/g);
+		}
+	}
+}
+</code></pre>
+<h2 id="i">I</h2>
+<p>拆点拆边带花树，一般图最大匹配（网络流是错的</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1010,M=3e5+200;
+struct E{int to,nxt;}e[M];
+int n,m,id[N],Id,ans,match[N],pre[N],vis[N];
+int h[N],cnt,f[N],d[N];
+int x[N],y[N],num[N][N];
+queue&lt;int&gt;q;
+void init(){
+     Id=ans=cnt=0;
+	memset(h,-1,sizeof h);
+	memset(id,0,sizeof id);
+	memset(match,0,sizeof match);
+}
+void add(int u,int v){ e[cnt]=E{v,h[u]},h[u]=cnt++; }
+int getf(int x){ return f[x]==x?x:f[x]=getf(f[x]); }
+int LCA(int x,int y)
+{
+	for(++Id;;swap(x,y))
+		if(x)
+		{
+			x=getf(x);
+			if(id[x]==Id) return x;  
+			else id[x]=Id,x=pre[match[x]];		
+		}
+}
+void blossom(int x,int y,int l)
+{ 
+	while(getf(x)!=l)
+	{
+		pre[x]=y,y=match[x];
+		if(vis[y]==2) vis[y]=1,q.push(y);
+		if(getf(x)==x) f[x]=l;
+		if(getf(y)==y) f[y]=l;
+		x=pre[y];
+	} 
+}
+bool aug(int s){
+	for(int i=1;i&lt;=n;i++)
+		vis[i]=pre[i]=0,f[i]=i;
+	while(!q.empty()) q.pop();
+	q.push(s),vis[s]=1;
+	while(!q.empty())
+	{
+		int u=q.front();q.pop();
+		for(int i=h[u];~i;i=e[i].nxt)
+		{
+			int v=e[i].to;
+			if(getf(u)==getf(v)||vis[v]==2) continue;
+			if(!vis[v])
+			{
+				vis[v]=2,pre[v]=u;
+				if(!match[v])
+				{ 
+					for(int x=v,last;x;x=last)
+						last=match[pre[x]],match[x]=pre[x],match[pre[x]]=x;		
+					return 1;
+				}	
+				vis[match[v]]=1,q.push(match[v]);
+			} 
+			else 
+			{
+				 
+				int lca=LCA(u,v);
+				blossom(u,v,lca),blossom(v,u,lca);
+			}
+		}	
+	}
+	return 0;
+}
+void build()
+{
+	int kk=0;
+	for(int i=1;i&lt;=n;i++)
+	    for(int j=1;j&lt;=d[i];j++)
+	    num[i][j]=++kk;
+	for(int i=1;i&lt;=m;i++){
+		add(kk+1,kk+2);
+		add(kk+2,kk+1);
+		for(int j=1;j&lt;=d[x[i]];j++){
+			add(num[x[i]][j],kk+1);
+			add(kk+1,num[x[i]][j]);
+		}
+		for(int j=1;j&lt;=d[y[i]];j++){
+			add(num[y[i]][j],kk+2);
+			add(kk+2,num[y[i]][j]);
+		}
+		kk+=2;
+	}
+	n=kk;
+}
+int main()
+{
+	while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))
+	{
+		init();
+		for(int i=1;i&lt;=n;i++)scanf(&quot;%d&quot;,&amp;d[i]); 
+		for(int i=1;i&lt;=m;i++){
+			scanf(&quot;%d%d&quot;,&amp;x[i],&amp;y[i]);
+		}
+		build();
+		
+		for(int i=1;i&lt;=n;i++){
+			if(!match[i]&amp;&amp;aug(i)){
+				ans++;
+			}
+		}
+		if(ans*2==n)puts(&quot;Yes&quot;);
+		else puts(&quot;No&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<h2 id="j">J</h2>
+<p>微积分，贝塔函数</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long ll;;
+const int N=3e6+3000;
+const ll mod=998244353;
+ll f[N];
+ll qpow(ll a,ll b){
+	ll ans=1;
+	while(b)
+	{
+		if(b&amp;1)ans=(ans*a)%mod;
+		b&gt;&gt;=1;
+		a=(a*a)%mod;
+	}
+	return ans;
+}
+int main()
+{
+	ll n;f[0]=1;
+	for(int i=1;i&lt;=3e6+10;i++)f[i]=f[i-1]*i%mod;
+	while(cin&gt;&gt;n)
+	{
+		cout&lt;&lt;f[n]*f[n]%mod*qpow(f[2*n+1],mod-2)%mod&lt;&lt;endl;
+	}
+	
+}
+</code></pre>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://jinhb5518.github.io/post/cf-ji-lu-2/">
+              <h3 class="post-title">
+                下一篇：CF记录（2）
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">Think twice|Code once</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jinhb5518.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
